@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Container from '@material-ui/core/Container'
+import { withStyles } from '@material-ui/styles'
+import "./App.css";
 
-function App() {
+import Home from "./Containers/Home";
+
+const style = theme => ({
+    root: {
+        backgroundColor: 'whitesmoke',
+        // zIndex: '-1',
+        // position: 'relative'
+    } 
+})
+
+
+
+function App(props) {
+  const { classes } = props;
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <Container maxWidth>
+        <BrowserRouter>
+          <Route path="/" exact component={Home} />
+          {/* <Route path='/login' exact component={Login} />
+        <Route path='/signup' exact component={Signup} /> */}
+        </BrowserRouter>
+      </Container>
     </div>
   );
 }
 
-export default App;
+export default withStyles(style)(App);
