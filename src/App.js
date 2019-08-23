@@ -9,8 +9,6 @@ import Home from "./Containers/Home";
 const style = theme => ({
     root: {
         backgroundColor: 'whitesmoke',
-        // zIndex: '-1',
-        // position: 'relative'
     } 
 })
 

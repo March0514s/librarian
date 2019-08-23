@@ -14,8 +14,6 @@ const style = theme => ({
         backgroundImage: 'linear-gradient(rgba(255,255,255, .8), rgba(255,255,255,.5)), url("https://www.islernw.com/wp-content/uploads/2017/10/isler_business_advisors_portland.jpg")',
         backgroundSize: 'cover',
         height: '70vh',
-        // position: 'relative',
-        // zIndex: '-1',
     '& div': {
         marginLeft: '100px',
         },

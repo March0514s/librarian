@@ -10,14 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = theme => ({
     root: {
-        backgroundColor: 'white',
+        backgroundColor: 'white', 
         color: 'rgb(206, 197, 70)',
         textTransform: 'capitalize',
         display:'flex',
         justifyContent: 'space-between',
-        zIndex: '2',
-        position: 'relative',
-
     },
 });
 
@@ -39,7 +36,7 @@ function Navbar(props) {
 
   return (
     <div>
-        <AppBar position="static">
+        <AppBar position="relative">
             <Toolbar className={classes.root}>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                     <MenuIcon />
