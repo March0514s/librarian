@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Slideshow from "../Components/Slideshow";
 import PresentationCard from "../Components/PresentationCard";
+import BalanceCard from "../Components/BalanceCard";
 import { withStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
@@ -113,7 +114,7 @@ function Home(props) {
       </div>
       {/* One bigger card and description of one feature */}
       <div className={classes.second}>
-        <PresentationCard title="cash cash cash" />
+        <BalanceCard title="cash cash cash" />
         <div className={classes.secondText}>
           <Typography variant="h3">All your money in one place</Typography>
           <Divider />
