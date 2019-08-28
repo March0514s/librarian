@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon'
 import clsx from 'clsx';
+import CardHeader from "@material-ui/core/CardHeader";
 
 const style = theme => ({
     root: {
@@ -39,6 +40,7 @@ const style = theme => ({
     },
     '& h6': {
         color: 'rgb(206, 197, 70)',
+        fontWeight: 'bold',
         display: 'flex',
         justifyContent: 'center',
         marginBottom: '5px',
@@ -46,6 +48,12 @@ const style = theme => ({
     },
     icon: {
       },
+
+      
+    
+},
+header: {
+    backgroundColor: "#CEC546",
 },
 });
 
@@ -56,6 +64,7 @@ function PresentationCard(props){
         <Container maxWidth className={classes.root}>
           <div className={classes.outside}>
           <Card elevation={2}>
+              <CardHeader className={classes.header}/>
             <CardContent className={classes.inside}>
               <div>
                   <Icon className={clsx(classes.icon, 'fa fa-plus-circle')} />

@@ -16,7 +16,7 @@ const style = theme => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    marginBottom: "130px"
+    marginBottom: "120px"
   },
   outside: {
     borderRadius: "100%",

@@ -20,9 +20,10 @@ const style = theme => ({
         "& h3": {
             marginBottom: '5px',
             color: 'rgb(206, 197, 70)',
+            fontWeight: 'bold',
           },
           "& h6": {
-            fontSize: '16px',
+            fontSize: '20px',
             marginBottom: '5px',
             width: '45vw'
           }
@@ -38,9 +39,9 @@ const MainButton = withStyles(theme => ({
       marginTop: '15px',
       paddingLeft: '30px',
       paddingRight: '30px',
-      position: 'absolute',
-      left: '130px',
-      top: '370px',
+    //   position: 'absolute',
+    //   left: '130px',
+    //   top: '370px',
       "&:hover": {
         backgroundColor: "rgb(180, 187, 60)"
       }
@@ -50,7 +51,7 @@ const MainButton = withStyles(theme => ({
 function Slideshow(props){
     const { classes } = props;
     const [mainText, setMainText] = useState('Your money at check');
-    const [subtext, setSubText] = useState('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, ratione expedita aliquam inventore neque ad. Quis expedita quod corrupti obcaecati?');
+    const [subtext, setSubText] = useState('Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, voluptas. Odio assumenda sequi dolorum placeat porro perferendis. Dolorum, quae et commodi officiis sit eum aperiam ex? Possimus rerum illo debitis.');
     
     
 
@@ -64,9 +65,9 @@ function Slideshow(props){
                     <Typography variant="h6">
                         {subtext}
                     </Typography>
+                    <MainButton variant="contained">Sign up Free</MainButton>
                 </div>
             </Box>
-                    <MainButton variant="contained">Sign up Free</MainButton>
         </Fragment>
     )
 }

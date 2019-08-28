@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Slideshow from "../Components/Slideshow";
 import PresentationCard from "../Components/PresentationCard";
+import BillsCard from "../Components/BillsCard";
 import BalanceCard from "../Components/BalanceCard";
 import { withStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
@@ -19,12 +20,13 @@ const style = theme => ({
   },
   second: {
     display: "flex",
-    marginTop: "50px"
+    marginTop: "35px"
   },
   secondText: {
     width: "2100px",
     "& h3": {
-      color: "rgb(206, 197, 70)"
+      color: "rgb(206, 197, 70)",
+      fontWeight: 'bold'
     },
     "& h5": {
       marginTop: "30px",
@@ -36,11 +38,12 @@ const style = theme => ({
     display: "flex",
     marginLeft: "100px",
     marginRight: "100px",
-    marginTop: "50px"
+    marginTop: "20px"
   },
   thirdText: {
     "& h3": {
-      color: "rgb(206, 197, 70)"
+      color: "rgb(206, 197, 70)",
+      fontWeight: 'bold'
     },
     "& h5": {
       marginTop: "30px",
@@ -117,7 +120,6 @@ function Home(props) {
         <BalanceCard title="cash cash cash" />
         <div className={classes.secondText}>
           <Typography variant="h3">All your money in one place</Typography>
-          <Divider />
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
             reprehenderit in sunt veniam earum, eum doloremque modi omnis
@@ -146,7 +148,6 @@ function Home(props) {
           <Typography variant="h3">
             Effortlessly stay on top of bills
           </Typography>
-          <Divider />
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
             reprehenderit in sunt veniam earum, eum doloremque modi omnis
@@ -168,7 +169,7 @@ function Home(props) {
           </Typography>
           <MainButton variant="outlined">sign up, it's free.</MainButton>
         </div>
-        <PresentationCard title="cash cash cash" />
+        <BillsCard/>
       </div>
       {/* One bigger card and description of one feature */}
       <div className={classes.second}>
