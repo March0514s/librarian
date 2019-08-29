@@ -39,10 +39,7 @@ const MainButton = withStyles(theme => ({
       marginTop: '15px',
       paddingLeft: '30px',
       paddingRight: '30px',
-    //   position: 'absolute',
-    //   left: '130px',
-    //   top: '370px',
-      "&:hover": {
+      "&:hover": {  
         backgroundColor: "rgb(180, 187, 60)"
       }
     }

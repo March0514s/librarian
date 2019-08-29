@@ -48,12 +48,10 @@ const style = theme => ({
     },
     icon: {
       },
-
-      
-    
 },
 header: {
     backgroundColor: "#CEC546",
+    
 },
 });
 

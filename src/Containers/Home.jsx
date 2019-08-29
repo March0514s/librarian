@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../Components/Navbar";
+
 import Slideshow from "../Components/Slideshow";
 import PresentationCard from "../Components/PresentationCard";
 import BillsCard from "../Components/BillsCard";
+
+//MUI
+import Navbar from "../Components/Navbar";
 import BalanceCard from "../Components/BalanceCard";
+import LoginCard from "../Components/LoginCard";
 import { withStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
@@ -13,22 +17,25 @@ import Container from "@material-ui/core/Container";
 
 const style = theme => ({
   root: {
-    backgroundColor: "white"
+    backgroundColor: "white",
+    boxShadow: '0 0 1em silver',
   },
   topCards: {
     display: "flex"
   },
   second: {
     display: "flex",
-    marginTop: "35px"
+    marginTop: "35px",
+    justifyContent: 'center'
   },
   secondText: {
-    width: "2100px",
     "& h3": {
+      width: "360px",
       color: "rgb(206, 197, 70)",
       fontWeight: 'bold'
     },
     "& h5": {
+      width: "600px",
       marginTop: "30px",
       marginBottom: "20px",
       marginRight: "100px"
@@ -38,19 +45,24 @@ const style = theme => ({
     display: "flex",
     marginLeft: "100px",
     marginRight: "100px",
-    marginTop: "20px"
+    marginTop: "20px",
+    // marginBottom: "100px",
+    justifyContent: 'center'
   },
   thirdText: {
     "& h3": {
+      width: "360px",
       color: "rgb(206, 197, 70)",
       fontWeight: 'bold'
     },
     "& h5": {
+      width: "600px",
       marginTop: "30px",
       marginBottom: "20px",
       marginRight: "100px"
     },
     "& $bullet": {
+      width: "600px",
       marginBottom: "20px"
     }
   },
@@ -58,7 +70,8 @@ const style = theme => ({
     marginTop: "50px",
     marginBottom: "50px",
     "& h3": {
-        marginBottom: '20px'
+        marginBottom: '20px',
+        fontWeight: 'bold'
     },
     "& div": {
         marginBottom: '15px'
@@ -122,21 +135,18 @@ function Home(props) {
           <Typography variant="h3">All your money in one place</Typography>
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
-            reprehenderit in sunt veniam earum, eum doloremque modi omnis
-            consectetur necessitatibus nobis placeat numquam magni vitae dolorem
-            doloribus vel. Suscipit saepe numquam culpa impedit maiores mollitia
-            pariatur obcaecati maxime, ea excepturi, nam esse porro optio.
+            reprehenderit in sunt veniam earum, eum doloremque modi omnis.
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <MainButton variant="outlined">sign up, it's free.</MainButton>
@@ -150,21 +160,18 @@ function Home(props) {
           </Typography>
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
-            reprehenderit in sunt veniam earum, eum doloremque modi omnis
-            consectetur necessitatibus nobis placeat numquam magni vitae dolorem
-            doloribus vel. Suscipit saepe numquam culpa impedit maiores mollitia
             pariatur obcaecati maxime, ea excepturi, nam esse porro optio.
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <MainButton variant="outlined">sign up, it's free.</MainButton>
@@ -173,27 +180,24 @@ function Home(props) {
       </div>
       {/* One bigger card and description of one feature */}
       <div className={classes.second}>
-        <PresentationCard title="cash cash cash" />
+        <LoginCard/>
         <div className={classes.secondText}>
           <Typography variant="h3">We’re serious about security</Typography>
-          <Divider />
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
-            reprehenderit in sunt veniam earum, eum doloremque modi omnis
-            consectetur necessitatibus nobis placeat numquam magni vitae dolorem
             doloribus vel. Suscipit saepe numquam culpa impedit maiores mollitia
             pariatur obcaecati maxime, ea excepturi, nam esse porro optio.
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <Typography variant="h6">
-            > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            > Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             voluptates!
           </Typography>
           <MainButton variant="outlined">sign up, it's free.</MainButton>
@@ -206,7 +210,7 @@ function Home(props) {
         </Typography>
         <div>
           <Typography variant="body1" align="center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             commodi. Ex dolor earum, laborum incidunt expedita sed quis facilis,
             qui libero dicta id? Tempore neque modi laborum eveniet ratione,
             reiciendis aspernatur optio molestiae, quisquam similique quidem
@@ -221,9 +225,9 @@ function Home(props) {
       </Container>
       {/* Cards describing what you can do with the software */}
       <div className={classes.topCards}>
-        <PresentationCard title="Set your priorities" />
-        <PresentationCard title="Track your expenses" />
-        <PresentationCard title="Own your finances" />
+        <PresentationCard title="Budgets that work" />
+        <PresentationCard title="Money on the go" />
+        <PresentationCard title="One step at a time" />
       </div>
       {/* Invitation to sign up */}
       <Container className={classes.generalDescription}>
@@ -232,7 +236,7 @@ function Home(props) {
         </Typography>
         <div>
           <Typography variant="body1" align="center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus,
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             commodi. Ex dolor earum, laborum incidunt expedita sed quis facilis,
             commodi. Ex dolor earum, laborum incidunt expedita sed quis facilis,
             commodi. Ex dolor earum, laborum incidunt expedita sed quis facilis,

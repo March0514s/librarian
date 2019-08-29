@@ -21,8 +21,8 @@ const style = theme => ({
   outside: {
     borderRadius: "100%",
     width: "300px",
-    marginLeft: "50px",
-    marginRight: "50px"
+    // marginLeft: "50px",
+    marginRight: "100px"
   },
   inside: {
     display: "flex",

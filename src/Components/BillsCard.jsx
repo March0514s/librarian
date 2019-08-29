@@ -15,7 +15,7 @@ const style = theme => ({
     justifyContent: "center",
     marginTop: "10px",
     marginBottom: "120px",
-    width: '500px'
+    width: '445px'
   },
   outside: {
     marginLeft: "25px",
