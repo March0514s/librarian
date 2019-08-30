@@ -14,7 +14,6 @@ const style = theme => ({
     display: "flex",
     justifyContent: "center",
     marginTop: "10px",
-    marginBottom: "120px",
     width: '445px'
   },
   outside: {

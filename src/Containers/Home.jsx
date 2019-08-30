@@ -5,6 +5,10 @@ import Slideshow from "../Components/Slideshow";
 import PresentationCard from "../Components/PresentationCard";
 import BillsCard from "../Components/BillsCard";
 
+import { faBullseye } from '@fortawesome/free-solid-svg-icons'
+import { faChartBar } from '@fortawesome/free-solid-svg-icons'
+import { faCoins } from '@fortawesome/free-solid-svg-icons'
+
 //MUI
 import Navbar from "../Components/Navbar";
 import BalanceCard from "../Components/BalanceCard";
@@ -21,14 +25,17 @@ const style = theme => ({
     boxShadow: '0 0 1em silver',
   },
   topCards: {
-    display: "flex"
-  },
-  second: {
     display: "flex",
-    marginTop: "35px",
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: '60px',
+    marginBottom: '90px',
   },
-  secondText: {
+  leftFeature: {
+    display: "flex",
+    justifyContent: 'center',
+    marginBottom: '100px',
+  },
+  leftFeatureText: {
     "& h3": {
       width: "360px",
       color: "rgb(206, 197, 70)",
@@ -41,15 +48,14 @@ const style = theme => ({
       marginRight: "100px"
     }
   },
-  third: {
+  rightFeature: {
     display: "flex",
     marginLeft: "100px",
     marginRight: "100px",
-    marginTop: "20px",
-    // marginBottom: "100px",
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: '100px',
   },
-  thirdText: {
+  rightFeatureText: {
     "& h3": {
       width: "360px",
       color: "rgb(206, 197, 70)",
@@ -61,20 +67,34 @@ const style = theme => ({
       marginBottom: "20px",
       marginRight: "100px"
     },
-    "& $bullet": {
-      width: "600px",
-      marginBottom: "20px"
-    }
   },
+
   generalDescription: {
-    marginTop: "50px",
-    marginBottom: "50px",
+    paddingBottom: "80px",
     "& h3": {
-        marginBottom: '20px',
-        fontWeight: 'bold'
+      marginBottom: '20px',
+      fontWeight: 'bold',
     },
     "& div": {
-        marginBottom: '15px'
+      marginLeft: '100px',
+      marginRight: '100px',
+      marginBottom: '40px',
+    }
+  },
+
+  finalInvitation: {
+    backgroundColor: '#2C3539',
+    color: 'white',
+    paddingBottom: "40px",
+    paddingTop: "160px",
+    "& h3": {
+      marginBottom: '20px',
+      fontWeight: 'bold',
+    },
+    "& div": {
+      marginLeft: '100px',
+      marginRight: '100px',
+      marginBottom: '40px',
     }
   },
 
@@ -117,21 +137,24 @@ const MainButton = withStyles(theme => ({
 
 function Home(props) {
   const { classes } = props;
+
+
   return (
     <div className={classes.root}>
       <Navbar />
       {/* Big presentation screen with signup*/}
       <Slideshow />
+      
       {/* Cards describing features */}
       <div className={classes.topCards}>
-        <PresentationCard title="Set your priorities" />
-        <PresentationCard title="Track your expenses" />
-        <PresentationCard title="Own your finances" />
+        <PresentationCard title="Set your priorities" icon={faBullseye} />
+        <PresentationCard title="Track your expenses" icon={faChartBar}  />
+        <PresentationCard title="Own your finances" icon={faCoins} />
       </div>
       {/* One bigger card and description of one feature */}
-      <div className={classes.second}>
+      <div className={classes.leftFeature}>
         <BalanceCard title="cash cash cash" />
-        <div className={classes.secondText}>
+        <div className={classes.leftFeatureText}>
           <Typography variant="h3">All your money in one place</Typography>
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
@@ -153,8 +176,8 @@ function Home(props) {
         </div>
       </div>
       {/* One bigger card and description of one feature */}
-      <div className={classes.third}>
-        <div className={classes.thirdText}>
+      <div className={classes.rightFeature}>
+        <div className={classes.rightFeatureText}>
           <Typography variant="h3">
             Effortlessly stay on top of bills
           </Typography>
@@ -179,9 +202,9 @@ function Home(props) {
         <BillsCard/>
       </div>
       {/* One bigger card and description of one feature */}
-      <div className={classes.second}>
+      <div className={classes.leftFeature}>
         <LoginCard/>
-        <div className={classes.secondText}>
+        <div className={classes.leftFeatureText}>
           <Typography variant="h3">We’re serious about security</Typography>
           <Typography variant="h5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolor
@@ -204,7 +227,7 @@ function Home(props) {
         </div>
       </div>
       {/* General description of the product */}
-      <Container className={classes.generalDescription}>
+      <div className={classes.generalDescription}>
         <Typography variant="h3" align="center">
           Intuitive features, powerful results
         </Typography>
@@ -222,15 +245,15 @@ function Home(props) {
             Learn More
           </Typography>
         </Link>
-      </Container>
+      </div>
       {/* Cards describing what you can do with the software */}
       <div className={classes.topCards}>
-        <PresentationCard title="Budgets that work" />
-        <PresentationCard title="Money on the go" />
-        <PresentationCard title="One step at a time" />
+        <PresentationCard title="Budgets that work" image="https://images.unsplash.com/photo-1518183214770-9cffbec72538?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
+        <PresentationCard title="Money on the go" image="https://images.unsplash.com/photo-1497161884053-1d0d43fe3c61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"/>
+        <PresentationCard title="One step at a time" image="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
       </div>
       {/* Invitation to sign up */}
-      <Container className={classes.generalDescription}>
+      <div className={classes.finalInvitation}>
         <Typography variant="h3" align="center">
           Sign up for Librarian today
         </Typography>
@@ -252,7 +275,7 @@ function Home(props) {
             Login
           </Button>
         </div>
-      </Container>
+      </div>
       {/* All links grouped */}
       {/* Sitemap and Social Media */}
       <Divider fullwidth />
