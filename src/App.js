@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/styles'
 import "./App.css";
 
 import Home from "./Containers/Home";
+import Login from "./Containers/Login";
+import Signup from "./Containers/Signup";
 
 const style = theme => ({
     root: {
@@ -22,8 +24,8 @@ function App(props) {
       <Container maxWidth>
         <BrowserRouter>
           <Route path="/" exact component={Home} />
-          {/* <Route path='/login' exact component={Login} />
-        <Route path='/signup' exact component={Signup} /> */}
+          <Route path='/login' exact component={Login} />
+        <Route path='/signup' exact component={Signup} />
         </BrowserRouter>
       </Container>
     </div>

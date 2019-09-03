@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 //MUI
 import Typography from '@material-ui/core/Typography';
@@ -62,7 +63,7 @@ function Slideshow(props){
                     <Typography variant="h6">
                         {subtext}
                     </Typography>
-                    <MainButton variant="contained">Sign up Free</MainButton>
+                    <MainButton variant="contained" component={Link} to="/signup">Sign up Free</MainButton>
                 </div>
             </Box>
         </Fragment>

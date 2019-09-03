@@ -45,8 +45,10 @@ function Navbar(props) {
                     librarian
                 </Typography>
                 <div>
-                    <MainButton >signup</MainButton>
-                    <Button variant="outlined" color="inherit">login</Button>
+                    <MainButton component={Link} to="/signup">signup</MainButton>
+                    <Link>
+                    <Button className={classes.button} variant="outlined" color="inherit" component={Link} to="/login">login</Button>
+                    </Link>
                 </div>
             </Toolbar>
         </AppBar>
