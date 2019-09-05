@@ -7,6 +7,7 @@ import "./App.css";
 import Home from "./Containers/Home";
 import Login from "./Containers/Login";
 import Signup from "./Containers/Signup";
+import Dashboard from "./Containers/Dashboard";
 
 const style = theme => ({
     root: {
@@ -26,6 +27,7 @@ function App(props) {
           <Route path="/" exact component={Home} />
           <Route path='/login' exact component={Login} />
         <Route path='/signup' exact component={Signup} />
+        <Route path='/dashboard' exact component={Dashboard} />
         </BrowserRouter>
       </Container>
     </div>
