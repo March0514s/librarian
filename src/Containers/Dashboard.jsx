@@ -1,4 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
+
+import CardWindow from "../Components/CardWindow";
 
 //MUI
 import { withStyles } from "@material-ui/styles";
@@ -6,6 +8,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,6 +25,7 @@ import { faChild } from "@fortawesome/free-solid-svg-icons";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const style = theme => ({
   root: {
@@ -29,7 +33,8 @@ const style = theme => ({
     height: "100vh"
   },
   drawer: {
-    width: "280px"
+    width: "280px",
+    hidden: 'true'
   },
   chartGroup: {
     "& p": {
@@ -37,8 +42,8 @@ const style = theme => ({
       marginTop: "10px"
     },
     "& svg": {
-        marginLeft: "10px",
-      }
+      marginLeft: "10px"
+    }
   },
   monthSelector: {
     display: "flex",
@@ -53,8 +58,17 @@ const style = theme => ({
       marginBottom: "10px"
     },
     "& svg": {
-      marginLeft: "30px",
+      marginLeft: "30px"
     }
+  },
+  avatar: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "20px"
+  },
+  container: {
+    marginLeft: '235px',
+    marginTop: '20px'
   }
 });
 
@@ -85,10 +99,13 @@ function Dashboard(props) {
         }}
         anchor="left"
       >
+        <div className={classes.avatar}>
+          <FontAwesomeIcon icon={faUserCircle} size="4x" />
+        </div>
         <div className={classes.monthSelector}>
-            <FontAwesomeIcon icon={faAngleLeft} size='2x'/>
+          <FontAwesomeIcon icon={faAngleLeft} size="2x" />
           <Typography variant="h6">SET/2019</Typography>
-            <FontAwesomeIcon icon={faAngleRight} size='2x'/>
+          <FontAwesomeIcon icon={faAngleRight} size="2x" />
         </div>
         <Divider />
         <div className={classes.chartGroup}>
@@ -142,6 +159,9 @@ function Dashboard(props) {
           </GroupButton>
         </div>
       </Drawer>
+      <Container className={classes.container}>
+        <CardWindow/>
+      </Container>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { faBullseye } from "@fortawesome/free-solid-svg-icons";
 import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 
+
 //MUI
 import Navbar from "../Components/Navbar";
 import BalanceCard from "../Components/BalanceCard";
