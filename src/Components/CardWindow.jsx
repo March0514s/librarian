@@ -16,19 +16,10 @@ import TextField from "@material-ui/core/TextField";
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandHoldingUsd } from "@fortawesome/free-solid-svg-icons";
-import { faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { faReceipt } from "@fortawesome/free-solid-svg-icons";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { faMedkit } from "@fortawesome/free-solid-svg-icons";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
-import { faMale } from "@fortawesome/free-solid-svg-icons";
-import { faChild } from "@fortawesome/free-solid-svg-icons";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faBullseye } from "@fortawesome/free-solid-svg-icons";
+import { borderRadius } from "@material-ui/system";
 
 const style = theme => ({
   root: {
@@ -59,19 +50,34 @@ const style = theme => ({
   headerText: {
     color: "#CEC546",
     fontSize: "21px",
-    fontweight: "bold",
-  }
+    fontweight: "bold"
+  },
+  buttons: {
+    '& svg': {
+      marginLeft:  '20px',
+      marginRight:  '5px',
+      marginTop:  '12px'
+    }
+  },
+
+  // cell: {
+  //   display: 'flex'
+  // }
 });
 
 const RoundedTextField = withStyles(theme => ({
   root: {
     marginTop: "0px",
     marginBottom: "0px",
+    display: "flex",
+    justifyContent: "center",
+    width: "200px",
+    marginLeft: "275px",
     "& input": {
-      height: "0px"
+      height: "0px",
+      borderRadius: '50px' //<THIS IS NOT WORKING
     }
-  },
-
+  }
 }))(TextField);
 
 function CardWindow(props) {
@@ -92,10 +98,10 @@ function CardWindow(props) {
                   </div>
                 </TableCell>
                 <TableCell variant="h5" className={classes.headerText}>
-                  R$
+                  <Typography align="center">R$</Typography>
                 </TableCell>
                 <TableCell variant="h5" className={classes.headerText}>
-                  %
+                  <Typography align="center">%</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -111,16 +117,16 @@ function CardWindow(props) {
                     variant="outlined"
                     inputProps={{ "aria-label": "bare" }}
                   />
-                </TableCell>
+                  <div className={classes.buttons}>
+                    <FontAwesomeIcon icon={faPen} size="1x" />
+                    <FontAwesomeIcon icon={faPlus} size="1x" />
+                  </div>
+                </TableCell >
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
+                  <FontAwesomeIcon icon={faBullseye} size="1x" />
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -136,14 +142,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -159,14 +160,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -182,14 +178,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -205,14 +196,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -228,14 +214,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -251,14 +232,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -274,14 +250,9 @@ function CardWindow(props) {
                   />
                 </TableCell>
                 <TableCell>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
+                  <Typography variant="body1" align="center">
+                    00.00
+                  </Typography>
                 </TableCell>
               </TableRow>
             </TableBody>

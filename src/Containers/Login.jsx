@@ -91,6 +91,7 @@ function Login(props) {
               //   onChange={}
               margin="normal"
               variant="outlined"
+              type="password"
             />
             <div className={classes.remember}>
               <Checkbox />

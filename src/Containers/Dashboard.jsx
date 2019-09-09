@@ -39,7 +39,7 @@ const style = theme => ({
   chartGroup: {
     "& p": {
       marginLeft: "20px",
-      marginTop: "10px"
+      marginTop: "10px",
     },
     "& svg": {
       marginLeft: "10px"
@@ -53,6 +53,7 @@ const style = theme => ({
   },
   chartSubgroup: {
     "& p": {
+      
       marginLeft: "15px",
       marginTop: "10px",
       marginBottom: "10px"
@@ -87,6 +88,8 @@ const SubgroupButton = withStyles(theme => ({
   }
 }))(Button);
 
+const primary = 'rgb(206, 197, 70)';
+
 function Dashboard(props) {
   const { classes } = props;
 
@@ -100,61 +103,61 @@ function Dashboard(props) {
         anchor="left"
       >
         <div className={classes.avatar}>
-          <FontAwesomeIcon icon={faUserCircle} size="4x" />
+          <FontAwesomeIcon icon={faUserCircle} size="4x" color={primary} />
         </div>
         <div className={classes.monthSelector}>
-          <FontAwesomeIcon icon={faAngleLeft} size="2x" />
+          <FontAwesomeIcon icon={faAngleLeft} size="2x" color={primary} />
           <Typography variant="h6">SET/2019</Typography>
-          <FontAwesomeIcon icon={faAngleRight} size="2x" />
+          <FontAwesomeIcon icon={faAngleRight} size="2x" color={primary} />
         </div>
         <Divider />
         <div className={classes.chartGroup}>
           <GroupButton fullWidth size="small">
-            <FontAwesomeIcon icon={faHandHoldingUsd} size="2x" />
+            <FontAwesomeIcon icon={faHandHoldingUsd} size="2x" color={primary} />
             <Typography variant="body1">Income</Typography>
           </GroupButton>
           <div>
             <GroupButton fullWidth size="small">
-              <FontAwesomeIcon icon={faFileInvoiceDollar} size="2x" />
+              <FontAwesomeIcon icon={faFileInvoiceDollar} size="2x" color={primary} />
               <Typography variant="body1">Expenses</Typography>
             </GroupButton>
             <div className={classes.chartSubgroup}>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faCoins} size="2x" />
+                <FontAwesomeIcon icon={faCoins} size="2x" color={primary} />
                 <Typography variant="body1">Financial</Typography>
               </SubgroupButton>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faHome} size="2x" />
+                <FontAwesomeIcon icon={faHome} size="2x" color={primary} />
                 <Typography variant="body1">Housing</Typography>
               </SubgroupButton>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faMedkit} size="2x" />
+                <FontAwesomeIcon icon={faMedkit} size="2x" color={primary} />
                 <Typography variant="body1">Health</Typography>
               </SubgroupButton>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faCar} size="2x" />
+                <FontAwesomeIcon icon={faCar} size="2x" color={primary} />
                 <Typography variant="body1">Transport</Typography>
               </SubgroupButton>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faMale} size="2x" />
+                <FontAwesomeIcon icon={faMale} size="2x" color={primary} />
                 <Typography variant="body1">Personal</Typography>
               </SubgroupButton>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faChild} size="2x" />
+                <FontAwesomeIcon icon={faChild} size="2x" color={primary} />
                 <Typography variant="body1">Dependant</Typography>
               </SubgroupButton>
               <SubgroupButton fullWidth size="small">
-                <FontAwesomeIcon icon={faPaw} size="2x" />
+                <FontAwesomeIcon icon={faPaw} size="2x" color={primary} />
                 <Typography variant="body1">Pet</Typography>
               </SubgroupButton>
             </div>
           </div>
           <GroupButton fullWidth size="small">
-            <FontAwesomeIcon icon={faCamera} size="2x" />
+            <FontAwesomeIcon icon={faCamera} size="2x" color={primary} />
             <Typography variant="body1">Capture</Typography>
           </GroupButton>
           <GroupButton fullWidth size="small">
-            <FontAwesomeIcon icon={faReceipt} size="2x" />
+            <FontAwesomeIcon icon={faReceipt} size="2x" color={primary} />
             <Typography variant="body1">Process</Typography>
           </GroupButton>
         </div>
