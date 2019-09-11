@@ -13,8 +13,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Fab from "@material-ui/core/Fab";
-import CloseIcon from "@material-ui/icons/CloseOutlined"
-import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/CloseOutlined";
+import IconButton from "@material-ui/core/IconButton";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,116 +22,141 @@ import { faHandHoldingUsd } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faBullseye } from "@fortawesome/free-solid-svg-icons";
+import { faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faMedkit } from "@fortawesome/free-solid-svg-icons";
+import { faCar } from "@fortawesome/free-solid-svg-icons";
+import { faMale } from "@fortawesome/free-solid-svg-icons";
+import { faChild } from "@fortawesome/free-solid-svg-icons";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
+
+//Object reference
+
+
+
+
 
 const style = theme => ({
   root: {
-    display: "flex"
+    marginBottom: '40px',
   },
 
   header: {
     backgroundColor: "#CEC546"
   },
 
-  outside: {
-    width: "1205px",
-    height: "680px"
-  },
-
-  tableHeader: {
-    display: "flex",
-    "& h5": {
-      marginLeft: "10px",
-      color: "#CEC546",
-      fontweight: "bold"
+  cell: {
+    "&:last-child":{
+      paddingLeft: '75px'
     },
-    "& svg": {
-      color: "#CEC546"
+    "& div": {
+      justifyContent: 'center',
+      display: "flex",
+      "& button": {
+        opacity: 0,
+        marginLeft: "10px",
+        padding: '10px'
+      },
+      "& p": {
+        marginTop: '8px'
+      },
     }
-  },
-
-  headerText: {
-    color: "#CEC546",
-    fontSize: "21px",
-    fontweight: "bold",
-    width: "200px"
-  },
-  buttons: {
-    '& svg': {
-      // opacity: 0,
-      // marginLeft:  '20px',
-      // marginRight:  '5px',
-      // marginTop:  '12px'
-    },
-    '& button': {
-      opacity: 0,
-      marginLeft:  '10px',
-      // marginRight:  '5px',
-      marginTop:  '-3px'
-    }
-  },
-
-  percent: {
-    display: 'flex', 
-    marginLeft: '190px',
-    marginTop: '6px', 
-    '& svg': {
-      // marginLeft: '20px'
-    },
-    '& button': {
-      opacity: 0,
-      marginLeft: '10px',
-      marginTop: '-8px'
-    },
-  },
-  
-  target: {
-    marginTop: '2px',
-    // opacity: 0
   },
 
   row: {
-    '&:hover': {
-    backgroundColor: 'whitesmoke'
-  },
-    '&:hover button': {
+    "&:hover": {
+      backgroundColor: "whitesmoke"
+    },
+    "&:hover button": {
       opacity: 1
     }
-  }
+  },
+
+  firstHeaderCell: {
+    color: "#CEC546" ,
+    "& div": {
+      display: "flex",
+      "& button": {
+        opacity: 1,
+        marginLeft: "10px",
+        padding: '10px'
+      },
+      "& p": {
+        marginTop: '8px',
+      },
+      "& svg": {
+        marginRight: '10px',
+      },
+    }
+  },
+  
+  headerCell: {
+    color: "#CEC546" ,
+    "& div": {
+      display: "flex",
+      "& button": {
+        opacity: 1,
+        marginLeft: "10px",
+        padding: '10px'
+      },
+      "& p": {
+        marginTop: '8px',
+      },
+    }
+  },
+
+  
 
 });
 
 const RoundedTextField = withStyles(theme => ({
   root: {
-    marginTop: "0px",
-    marginBottom: "0px",
-    marginLeft: '100px',
+    margin: "0px",
+    marginLeft: '90px',
     "& input": {
       height: "0px",
-      textAlign: 'right',
+      textAlign: "right",
+      backgroundColor: 'white',
+      borderRadius: "50px",
     },
     "& fieldset": {
-      // backgroundColor: 'white' <- NOT WORKING, hides the value of the text field.
+      // backgroundColor: 'white', //<- NOT WORKING, hides the value of the text field.
       borderRadius: "50px",
-      color: 'black'
-    },
+      color: "black"
+    }
   }
-  
 }))(TextField);
 
 const PrimaryFab = withStyles(theme => ({
   root: {
-    backgroundColor: '#CEC546',
-    '&:hover': {
-      backgroundColor: 'rgb(180, 187, 60)'
+    backgroundColor: "#CEC546",
+    "&:hover": {
+      backgroundColor: "rgb(180, 187, 60)"
     }
-    },
-  
+  }
 }))(Fab);
 
-const close = 
-<IconButton aria-label="delete" size="small" >
-<CloseIcon style={{color: 'white'}}fontSize="inherit"/>
-</IconButton>
+const close = (
+  <IconButton aria-label="delete" size="small">
+    <CloseIcon style={{ color: "white" }} fontSize="inherit" />
+  </IconButton>
+);
+const edit = (
+  <IconButton aria-label="delete" size="small">
+    <FontAwesomeIcon icon={faPen} size="1x" color="#CEC546" />
+  </IconButton>
+);
+const add = (
+  <IconButton aria-label="delete" size="small">
+    <FontAwesomeIcon icon={faPlus} size="1x" color="#CEC546" />
+  </IconButton>
+);
+const target = (
+  <IconButton aria-label="delete" size="small">
+    <FontAwesomeIcon icon={faBullseye} size="1x" color="#CEC546" />
+  </IconButton>
+);
 
 function CardWindow(props) {
   const { classes } = props;
@@ -143,247 +168,52 @@ function CardWindow(props) {
         <CardContent>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell style={{width: '100px'}}>
-                  <div className={classes.tableHeader}>
-                    <FontAwesomeIcon icon={faHandHoldingUsd} size="2x" />
-                    <Typography variant="h5">Income</Typography>
+              {<TableRow>
+                <TableCell className={classes.firstHeaderCell}>
+                  <div>
+                    <FontAwesomeIcon icon={props.table.tableIcon} size="2x" />
+                    <Typography variant="h5">{props.table.tableName}</Typography>
                   </div>
                 </TableCell>
-                <TableCell  className={classes.headerText}>
-                  <Typography variant="h6" align="center">R$</Typography>
+                <TableCell className={classes.headerCell}>
+                  <Typography variant="h6" align="center">
+                    R$
+                  </Typography>
                 </TableCell>
-                <TableCell  className={classes.headerText}>
-                  <Typography variant="h6" align="center">%</Typography>
+                <TableCell className={classes.headerCell}>
+                  <Typography variant="h6" align="center">
+                    %
+                  </Typography>
                 </TableCell>
-              </TableRow>
+              </TableRow>}
             </TableHead>
             <TableBody>
               {/*Row*/}
-              {/*Salário*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Salário</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
+              {props.table.tableRows.map(x => <TableRow className={classes.row}>
+                <TableCell><Typography variant="body1">{x.name}</Typography></TableCell>
+                <TableCell className={classes.cell}>
+                  <div>
+                    <RoundedTextField
+                      id="outlined-bare"
+                      className={classes.textField}
+                      defaultValue={x.value.toFixed(2)}
+                      margin="normal"
+                      variant="outlined"
+                      inputProps={{ "aria-label": "bare" }}
+                    />
+                    {edit}
+                    {add}
                   </div>
                 </TableCell>
-              </TableRow>
-              {/*13 Salário*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>13º Salário</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
+                <TableCell className={classes.cell}>
+                  <div>
+                    <Typography variant="body1" align="center">
+                      00.00
+                    </Typography>
+                    {target}
                   </div>
                 </TableCell>
-              </TableRow>
-              {/*Férias*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Férias</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
-                  </div>
-                </TableCell>
-              </TableRow>
-              {/*Aluguéis*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Aluguéis</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
-                  </div>
-                </TableCell>
-              </TableRow>
-              {/*Resgate*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Resgate</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
-                  </div>
-                </TableCell>
-              </TableRow>
-              {/*Renda Extra*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Renda Extra</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
-                  </div>
-                </TableCell>
-              </TableRow>
-              {/*Empréstimos*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Empréstimos</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
-                  </div>
-                </TableCell>
-              </TableRow>
-              {/*Outros*/}
-              <TableRow className={classes.row}>
-                <TableCell className={classes.tableCell}>Outros</TableCell>
-                <TableCell>
-                <div className={classes.buttons}>
-                  <RoundedTextField
-                    id="outlined-bare"
-                    className={classes.textField}
-                    defaultValue="00.00"
-                    margin="normal"
-                    variant="outlined"
-                    inputProps={{ "aria-label": "bare" }}
-                  />
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPen} size="1x"  color="white"/></PrimaryFab> 
-                    <PrimaryFab size='small'><FontAwesomeIcon icon={faPlus} size="1x" color="white"/></PrimaryFab>
-                  </div>
-                </TableCell >
-                <TableCell >
-                  <div className={classes.percent}>
-                  <Typography variant="body1" align="center" >
-                    00.00
-                  </Typography>
-                  <PrimaryFab size='small'>
-                  <FontAwesomeIcon icon={faBullseye} size="2x" className={classes.target} color="white" />
-                  </PrimaryFab>
-                  </div>
-                </TableCell>
-              </TableRow>
+              </TableRow>)}
             </TableBody>
           </Table>
         </CardContent>

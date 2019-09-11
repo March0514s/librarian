@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 
 import CardWindow from "../Components/CardWindow";
 
+
+
 //MUI
 import { withStyles } from "@material-ui/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,7 +14,7 @@ import Container from "@material-ui/core/Container";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandHoldingUsd } from "@fortawesome/free-solid-svg-icons";
+import { faHandHoldingUsd, faUmbrellaBeach } from "@fortawesome/free-solid-svg-icons";
 import { faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { faReceipt } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +28,395 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+
+
+// Table test objects
+const incomeTable = {
+  tableName: 'Income',
+  tableIcon: faHandHoldingUsd,
+  tableRows: [
+     {
+      name: 'Salário',
+      value: 0
+    },
+     {
+      name: '13º Salário',
+      value: 0
+    },
+     {
+      name: 'Férias',
+      value: 0
+    },
+     {
+      name: 'Aluguéis',
+      value: 0
+    },
+     {
+      name: 'Resgate',
+      value: 0
+    },
+     {
+      name: 'Renda Extra',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
+
+const financialTable = {
+  tableName: 'Financial Expenses',
+  tableIcon: faCoins,
+  tableRows: [
+     {
+      name: 'Ações',
+      value: 0
+    },
+     {
+      name: 'LCI, LCA, CDB',
+      value: 0
+    },
+     {
+      name: 'Previdência Privada',
+      value: 0
+    },
+     {
+      name: 'Fundos de Investimentos',
+      value: 0
+    },
+     {
+      name: 'Tesouro Direto',
+      value: 0
+    },
+     {
+      name: 'Empréstimos (pagos)',
+      value: 0
+    },
+     {
+      name: 'Tarifas Bancárias',
+      value: 0
+    },
+     {
+      name: 'Outro',
+      value: 0
+    },
+  ]
+}; 
+
+const housingTable = {
+  tableName: 'Housing Expenses',
+  tableIcon: faHome,
+  tableRows: [
+     {
+      name: 'Aluguel/Prestação',
+      value: 0
+    },
+     {
+      name: 'Condomínio',
+      value: 0
+    },
+     {
+      name: 'IPTU',
+      value: 0
+    },
+     {
+      name: 'Luz',
+      value: 0
+    },
+     {
+      name: 'Telefones',
+      value: 0
+    },
+     {
+      name: 'Internet',
+      value: 0
+    },
+     {
+      name: 'Gás',
+      value: 0
+    },
+     {
+      name: 'TV por assinatura/Netflix',
+      value: 0
+    },
+     {
+      name: 'Supermercado/feira/açougue/padaria',
+      value: 0
+    },
+     {
+      name: 'Empregados',
+      value: 0
+    },
+     {
+      name: 'Reforma/Consertos',
+      value: 0
+    },
+     {
+      name: 'Seguro de casa',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
+
+const healthTable = {
+  tableName: 'Health Expenses',
+  tableIcon: faMedkit,
+  tableRows: [
+     {
+      name: 'Plano de Saúde',
+      value: 0
+    },
+     {
+      name: 'Médico',
+      value: 0
+    },
+     {
+      name: 'Dentista',
+      value: 0
+    },
+     {
+      name: 'Terapia',
+      value: 0
+    },
+     {
+      name: 'Medicamentos',
+      value: 0
+    },
+     {
+      name: 'Exames',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+};
+
+const transportTable = {
+  tableName: 'Transport Expenses',
+  tableIcon: faCar,
+  tableRows: [
+     {
+      name: 'Ônibus/Metrô/Trem',
+      value: 0
+    },
+     {
+      name: 'Táxi/Uber',
+      value: 0
+    },
+     {
+      name: 'Prestação',
+      value: 0
+    },
+     {
+      name: 'Seguro de carro/moto',
+      value: 0
+    },
+     {
+      name: 'Combustível',
+      value: 0
+    },
+     {
+      name: 'Lavagens',
+      value: 0
+    },
+     {
+      name: 'IPVA/DPVAT/Licenciamento',
+      value: 0
+    },
+     {
+      name: 'Mecânico',
+      value: 0
+    },
+     {
+      name: 'Multas',
+      value: 0
+    },
+     {
+      name: 'Estacionamentos',
+      value: 0
+    },
+     {
+      name: 'Pedágios/Sem Parar',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
+
+const personalTable = {
+  tableName: 'Personal Expenses',
+  tableIcon: faMale,
+  tableRows: [
+     {
+      name: 'Higiene Pessoal',
+      value: 0
+    },
+     {
+      name: 'Cosméticos',
+      value: 0
+    },
+     {
+      name: 'Cabelereiro',
+      value: 0
+    },
+     {
+      name: 'Vestuário',
+      value: 0
+    },
+     {
+      name: 'Lavanderia',
+      value: 0
+    },
+     {
+      name: 'Academia',
+      value: 0
+    },
+     {
+      name: 'Cursos',
+      value: 0
+    },
+     {
+      name: 'Presentes',
+      value: 0
+    },
+     {
+      name: 'Doações',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
+
+const dependantTable = {
+  tableName: 'Dependant Expenses',
+  tableIcon: faChild,
+  tableRows: [
+     {
+      name: 'Escola/faculdade',
+      value: 0
+    },
+     {
+      name: 'Cursos extras',
+      value: 0
+    },
+     {
+      name: 'Material escolar',
+      value: 0
+    },
+     {
+      name: 'Esportes/Uniformes',
+      value: 0
+    },
+     {
+      name: 'Mesada',
+      value: 0
+    },
+     {
+      name: 'Passeios/Férias',
+      value: 0
+    },
+     {
+      name: 'Vestuário',
+      value: 0
+    },
+     {
+      name: 'Saúde/Medicamentos',
+      value: 0
+    },
+     {
+      name: 'Transporte',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
+
+const petTable = {
+  tableName: 'Pet Expenses',
+  tableIcon: faPaw,
+  tableRows: [
+     {
+      name: 'Petshop',
+      value: 0
+    },
+     {
+      name: 'Ração',
+      value: 0
+    },
+     {
+      name: 'Veterinário',
+      value: 0
+    },
+     {
+      name: 'Medicamentos',
+      value: 0
+    },
+     {
+      name: 'Vacinas',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
+
+const leisureTable = {
+  tableName: 'Leisure Expenses',
+  tableIcon: faUmbrellaBeach,
+  tableRows: [
+     {
+      name: 'Restaurantes',
+      value: 0
+    },
+     {
+      name: 'Café/Sorveteria',
+      value: 0
+    },
+     {
+      name: 'Bares/Boates',
+      value: 0
+    },
+     {
+      name: 'Livraria',
+      value: 0
+    },
+     {
+      name: 'Passagens',
+      value: 0
+    },
+     {
+      name: 'Hotéis',
+      value: 0
+    },
+     {
+      name: 'Passeios',
+      value: 0
+    },
+     {
+      name: 'Outros',
+      value: 0
+    },
+  ]
+}; 
 
 const style = theme => ({
   root: {
@@ -55,8 +446,8 @@ const style = theme => ({
     "& p": {
       
       marginLeft: "15px",
-      marginTop: "10px",
-      marginBottom: "10px"
+      marginTop: "8px",
+      marginBottom: "8px"
     },
     "& svg": {
       marginLeft: "30px"
@@ -65,11 +456,11 @@ const style = theme => ({
   avatar: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "20px"
+    marginTop: "10px"
   },
   container: {
     marginLeft: '235px',
-    marginTop: '20px'
+    marginTop: '20px',
   }
 });
 
@@ -103,7 +494,7 @@ function Dashboard(props) {
         anchor="left"
       >
         <div className={classes.avatar}>
-          <FontAwesomeIcon icon={faUserCircle} size="4x" color={primary} />
+          <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary} />
         </div>
         <div className={classes.monthSelector}>
           <FontAwesomeIcon icon={faAngleLeft} size="2x" color={primary} />
@@ -150,6 +541,10 @@ function Dashboard(props) {
                 <FontAwesomeIcon icon={faPaw} size="2x" color={primary} />
                 <Typography variant="body1">Pet</Typography>
               </SubgroupButton>
+              <SubgroupButton fullWidth size="small">
+                <FontAwesomeIcon icon={faUmbrellaBeach} size="2x" color={primary} />
+                <Typography variant="body1">Leisure</Typography>
+              </SubgroupButton>
             </div>
           </div>
           <GroupButton fullWidth size="small">
@@ -163,7 +558,15 @@ function Dashboard(props) {
         </div>
       </Drawer>
       <Container className={classes.container}>
-        <CardWindow/>
+        <CardWindow table={incomeTable}/>
+        <CardWindow table={financialTable}/>
+        <CardWindow table={housingTable}/>
+        <CardWindow table={healthTable}/>
+        <CardWindow table={transportTable}/>
+        <CardWindow table={personalTable}/>
+        <CardWindow table={dependantTable}/>
+        <CardWindow table={petTable}/>
+        <CardWindow table={petTable}/>
       </Container>
     </div>
   );
