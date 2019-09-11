@@ -39,6 +39,7 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 const style = theme => ({
   root: {
+    width: '104%',
     marginBottom: '40px',
   },
 
@@ -137,34 +138,40 @@ const PrimaryFab = withStyles(theme => ({
   }
 }))(Fab);
 
-const close = (
-  <IconButton aria-label="delete" size="small">
-    <CloseIcon style={{ color: "white" }} fontSize="inherit" />
-  </IconButton>
-);
-const edit = (
-  <IconButton aria-label="delete" size="small">
-    <FontAwesomeIcon icon={faPen} size="1x" color="#CEC546" />
-  </IconButton>
-);
-const add = (
-  <IconButton aria-label="delete" size="small">
-    <FontAwesomeIcon icon={faPlus} size="1x" color="#CEC546" />
-  </IconButton>
-);
-const target = (
-  <IconButton aria-label="delete" size="small">
-    <FontAwesomeIcon icon={faBullseye} size="1x" color="#CEC546" />
-  </IconButton>
-);
+
 
 function CardWindow(props) {
   const { classes } = props;
 
+  const close = (
+    <IconButton aria-label="close" size="small" onClick={props.close}>
+      <CloseIcon style={{ color: "white" }} fontSize="inherit" />
+    </IconButton>
+  );
+  const edit = (
+    <IconButton aria-label="edit" size="small">
+      <FontAwesomeIcon icon={faPen} size="1x" color="#CEC546" />
+    </IconButton>
+  );
+  const add = (
+    <IconButton aria-label="add" size="small">
+      <FontAwesomeIcon icon={faPlus} size="1x" color="#CEC546" />
+    </IconButton>
+  );
+  const target = (
+    <IconButton aria-label="target" size="small">
+      <FontAwesomeIcon icon={faBullseye} size="1x" color="#CEC546" />
+    </IconButton>
+  );
+
   return (
     <div className={classes.root}>
-      <Card className={classes.outside}>
+      <Card elevation={3} className={classes.outside}>
+        {props.close ?
         <CardHeader action={close} className={classes.header}></CardHeader>
+        :
+        <CardHeader className={classes.header}></CardHeader>
+      }
         <CardContent>
           <Table>
             <TableHead>

@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
 import CardWindow from "../Components/CardWindow";
+import ModalTarget from "../Components/ModalTarget";
 
 
 
@@ -421,7 +422,7 @@ const leisureTable = {
 const style = theme => ({
   root: {
     display: "flex",
-    height: "100vh"
+    height: "100%"
   },
   drawer: {
     width: "280px",
@@ -484,6 +485,16 @@ const primary = 'rgb(206, 197, 70)';
 function Dashboard(props) {
   const { classes } = props;
 
+  const [open, setOpen] = React.useState(null);
+
+  const handleCard = category => {
+    setOpen(category);
+  };
+
+  const handleClose = category => {
+    setOpen(null);
+  };
+
   return (
     <div className={classes.root}>
       <Drawer
@@ -503,70 +514,120 @@ function Dashboard(props) {
         </div>
         <Divider />
         <div className={classes.chartGroup}>
-          <GroupButton fullWidth size="small">
+          <GroupButton fullWidth size="small" onClick={() => handleCard('income')}>
             <FontAwesomeIcon icon={faHandHoldingUsd} size="2x" color={primary} />
             <Typography variant="body1">Income</Typography>
           </GroupButton>
           <div>
-            <GroupButton fullWidth size="small">
+            <GroupButton fullWidth size="small" onClick={() => handleCard('expenses')}>
               <FontAwesomeIcon icon={faFileInvoiceDollar} size="2x" color={primary} />
               <Typography variant="body1">Expenses</Typography>
             </GroupButton>
             <div className={classes.chartSubgroup}>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('financial')}>
                 <FontAwesomeIcon icon={faCoins} size="2x" color={primary} />
                 <Typography variant="body1">Financial</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('housing')}>
                 <FontAwesomeIcon icon={faHome} size="2x" color={primary} />
                 <Typography variant="body1">Housing</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('health')}>
                 <FontAwesomeIcon icon={faMedkit} size="2x" color={primary} />
                 <Typography variant="body1">Health</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('transport')}>
                 <FontAwesomeIcon icon={faCar} size="2x" color={primary} />
                 <Typography variant="body1">Transport</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('personal')}>
                 <FontAwesomeIcon icon={faMale} size="2x" color={primary} />
                 <Typography variant="body1">Personal</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('dependant')}>
                 <FontAwesomeIcon icon={faChild} size="2x" color={primary} />
                 <Typography variant="body1">Dependant</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('pet')}>
                 <FontAwesomeIcon icon={faPaw} size="2x" color={primary} />
                 <Typography variant="body1">Pet</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small">
+              <SubgroupButton fullWidth size="small" onClick={() => handleCard('leisure')}>
                 <FontAwesomeIcon icon={faUmbrellaBeach} size="2x" color={primary} />
                 <Typography variant="body1">Leisure</Typography>
               </SubgroupButton>
             </div>
           </div>
-          <GroupButton fullWidth size="small">
+          <GroupButton disabled fullWidth size="small">
             <FontAwesomeIcon icon={faCamera} size="2x" color={primary} />
             <Typography variant="body1">Capture</Typography>
           </GroupButton>
-          <GroupButton fullWidth size="small">
+          <GroupButton disabled fullWidth size="small">
             <FontAwesomeIcon icon={faReceipt} size="2x" color={primary} />
             <Typography variant="body1">Process</Typography>
           </GroupButton>
         </div>
       </Drawer>
       <Container className={classes.container}>
-        <CardWindow table={incomeTable}/>
-        <CardWindow table={financialTable}/>
-        <CardWindow table={housingTable}/>
-        <CardWindow table={healthTable}/>
-        <CardWindow table={transportTable}/>
-        <CardWindow table={personalTable}/>
-        <CardWindow table={dependantTable}/>
-        <CardWindow table={petTable}/>
-        <CardWindow table={petTable}/>
+        {
+          open === 'income' && (
+          <CardWindow table={incomeTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'financial' && (
+          <CardWindow table={financialTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'housing' && (
+          <CardWindow table={housingTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'health' && (
+          <CardWindow table={healthTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'transport' && (
+          <CardWindow table={transportTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'personal' && (
+          <CardWindow table={personalTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'dependant' && (
+          <CardWindow table={dependantTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'pet' && (
+          <CardWindow table={petTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'leisure' && (
+          <CardWindow table={leisureTable} close={handleClose}/>
+          )
+        }
+        {
+          open === 'expenses' && (
+          <div>
+            <CardWindow table={financialTable}/>
+            <CardWindow table={housingTable}/>
+            <CardWindow table={healthTable}/>
+            <CardWindow table={transportTable}/>
+            <CardWindow table={personalTable}/>
+            <CardWindow table={dependantTable}/>
+            <CardWindow table={petTable}/>
+            <CardWindow table={leisureTable}/>
+          </div>
+          )
+        }
       </Container>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import Icon from "@material-ui/core/Icon";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,6 +7,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Avatar from '@material-ui/core/Avatar';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const style = theme => ({
   root: {
@@ -83,7 +84,7 @@ function BillsCard(props) {
             />
             <CardContent className={classes.inside}>
               <div>
-              <Icon className={clsx(classes.icon, 'fas fa-envelope')}/>
+              <FontAwesomeIcon icon={faEnvelope} size="3x" color={'gray'}/>
               </div>
               <div className={classes.title}>
               <Typography variant="body1" align="center" >
