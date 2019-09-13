@@ -15,6 +15,7 @@ import TextField from "@material-ui/core/TextField";
 import Fab from "@material-ui/core/Fab";
 import CloseIcon from "@material-ui/icons/CloseOutlined";
 import IconButton from "@material-ui/core/IconButton";
+import ModalTarget from "./ModalTarget";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,16 +32,14 @@ import { faMale } from "@fortawesome/free-solid-svg-icons";
 import { faChild } from "@fortawesome/free-solid-svg-icons";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
-//Object reference
-
-
-
-
-
 const style = theme => ({
   root: {
-    width: '104%',
-    marginBottom: '40px',
+    width: "104%",
+    marginBottom: "40px"
+  },
+
+  outside: {
+    minHeight: "91vh"
   },
 
   header: {
@@ -48,20 +47,20 @@ const style = theme => ({
   },
 
   cell: {
-    "&:last-child":{
-      paddingLeft: '75px'
+    "&:last-child": {
+      paddingLeft: "75px"
     },
     "& div": {
-      justifyContent: 'center',
+      justifyContent: "center",
       display: "flex",
       "& button": {
         opacity: 0,
         marginLeft: "10px",
-        padding: '10px'
+        padding: "10px"
       },
       "& p": {
-        marginTop: '8px'
-      },
+        marginTop: "8px"
+      }
     }
   },
 
@@ -75,51 +74,48 @@ const style = theme => ({
   },
 
   firstHeaderCell: {
-    color: "#CEC546" ,
+    color: "#CEC546",
     "& div": {
       display: "flex",
       "& button": {
         opacity: 1,
         marginLeft: "10px",
-        padding: '10px'
+        padding: "10px"
       },
       "& p": {
-        marginTop: '8px',
+        marginTop: "8px"
       },
       "& svg": {
-        marginRight: '10px',
-      },
+        marginRight: "10px"
+      }
     }
   },
-  
+
   headerCell: {
-    color: "#CEC546" ,
+    color: "#CEC546",
     "& div": {
       display: "flex",
       "& button": {
         opacity: 1,
         marginLeft: "10px",
-        padding: '10px'
+        padding: "10px"
       },
       "& p": {
-        marginTop: '8px',
-      },
+        marginTop: "8px"
+      }
     }
-  },
-
-  
-
+  }
 });
 
 const RoundedTextField = withStyles(theme => ({
   root: {
     margin: "0px",
-    marginLeft: '90px',
+    marginLeft: "90px",
     "& input": {
       height: "0px",
       textAlign: "right",
-      backgroundColor: 'white',
-      borderRadius: "50px",
+      backgroundColor: "white",
+      borderRadius: "50px"
     },
     "& fieldset": {
       // backgroundColor: 'white', //<- NOT WORKING, hides the value of the text field.
@@ -138,11 +134,10 @@ const PrimaryFab = withStyles(theme => ({
   }
 }))(Fab);
 
-
-
 function CardWindow(props) {
   const { classes } = props;
-
+  const [open, setOpen] = React.useState(false);
+  
   const close = (
     <IconButton aria-label="close" size="small" onClick={props.close}>
       <CloseIcon style={{ color: "white" }} fontSize="inherit" />
@@ -159,72 +154,84 @@ function CardWindow(props) {
     </IconButton>
   );
   const target = (
-    <IconButton aria-label="target" size="small">
+    <IconButton aria-label="target" size="small" onClick={() => setOpen(true)}>
       <FontAwesomeIcon icon={faBullseye} size="1x" color="#CEC546" />
     </IconButton>
   );
 
+
+  
+
   return (
     <div className={classes.root}>
       <Card elevation={3} className={classes.outside}>
-        {props.close ?
-        <CardHeader action={close} className={classes.header}></CardHeader>
-        :
-        <CardHeader className={classes.header}></CardHeader>
-      }
+        {props.close ? (
+          <CardHeader action={close} className={classes.header}></CardHeader>
+        ) : (
+          <CardHeader className={classes.header}></CardHeader>
+        )}
         <CardContent>
           <Table>
             <TableHead>
-              {<TableRow>
-                <TableCell className={classes.firstHeaderCell}>
-                  <div>
-                    <FontAwesomeIcon icon={props.table.tableIcon} size="2x" />
-                    <Typography variant="h5">{props.table.tableName}</Typography>
-                  </div>
-                </TableCell>
-                <TableCell className={classes.headerCell}>
-                  <Typography variant="h6" align="center">
-                    R$
-                  </Typography>
-                </TableCell>
-                <TableCell className={classes.headerCell}>
-                  <Typography variant="h6" align="center">
-                    %
-                  </Typography>
-                </TableCell>
-              </TableRow>}
+              {
+                <TableRow>
+                  <TableCell className={classes.firstHeaderCell}>
+                    <div>
+                      <FontAwesomeIcon icon={props.table.tableIcon} size="2x" />
+                      <Typography variant="h5">
+                        {props.table.tableName}
+                      </Typography>
+                    </div>
+                  </TableCell>
+                  <TableCell className={classes.headerCell}>
+                    <Typography variant="h6" align="center">
+                      R$
+                    </Typography>
+                  </TableCell>
+                  <TableCell className={classes.headerCell}>
+                    <Typography variant="h6" align="center">
+                      %
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              }
             </TableHead>
             <TableBody>
               {/*Row*/}
-              {props.table.tableRows.map(x => <TableRow className={classes.row}>
-                <TableCell><Typography variant="body1">{x.name}</Typography></TableCell>
-                <TableCell className={classes.cell}>
-                  <div>
-                    <RoundedTextField
-                      id="outlined-bare"
-                      className={classes.textField}
-                      defaultValue={x.value.toFixed(2)}
-                      margin="normal"
-                      variant="outlined"
-                      inputProps={{ "aria-label": "bare" }}
-                    />
-                    {edit}
-                    {add}
-                  </div>
-                </TableCell>
-                <TableCell className={classes.cell}>
-                  <div>
-                    <Typography variant="body1" align="center">
-                      00.00
-                    </Typography>
-                    {target}
-                  </div>
-                </TableCell>
-              </TableRow>)}
+              {props.table.tableRows.map(x => (
+                <TableRow className={classes.row}>
+                  <TableCell>
+                    <Typography variant="body1">{x.name}</Typography>
+                  </TableCell>
+                  <TableCell className={classes.cell}>
+                    <div>
+                      <RoundedTextField
+                        id="outlined-bare"
+                        className={classes.textField}
+                        defaultValue={x.value.toFixed(2)}
+                        margin="normal"
+                        variant="outlined"
+                        inputProps={{ "aria-label": "bare" }}
+                      />
+                      {edit}
+                      {add}
+                    </div>
+                  </TableCell>
+                  <TableCell className={classes.cell}>
+                    <div>
+                      <Typography variant="body1" align="center">
+                        00.00
+                      </Typography>
+                      {target}
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
+      <ModalTarget open={open} onClose={() => setOpen(false)}/>
     </div>
   );
 }
