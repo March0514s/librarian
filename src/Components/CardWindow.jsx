@@ -35,11 +35,11 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 const style = theme => ({
   root: {
     width: "104%",
-    marginBottom: "40px"
+    marginBottom: "25px"
   },
 
   outside: {
-    minHeight: "91vh"
+    minHeight: "675px"
   },
 
   header: {
@@ -136,7 +136,7 @@ const PrimaryFab = withStyles(theme => ({
 
 function CardWindow(props) {
   const { classes } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false); //Modal state
   
   const close = (
     <IconButton aria-label="close" size="small" onClick={props.close}>
@@ -154,13 +154,10 @@ function CardWindow(props) {
     </IconButton>
   );
   const target = (
-    <IconButton aria-label="target" size="small" onClick={() => setOpen(true)}>
+    <IconButton aria-label="target" size="small" onClick={() => setOpen(true)}> 
       <FontAwesomeIcon icon={faBullseye} size="1x" color="#CEC546" />
     </IconButton>
   );
-
-
-  
 
   return (
     <div className={classes.root}>

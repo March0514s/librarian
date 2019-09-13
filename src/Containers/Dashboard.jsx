@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 
 import CardWindow from "../Components/CardWindow";
 import ModalTarget from "../Components/ModalTarget";
-
-
+import WelcomeMessage from "../Components/WelcomeMessage";
+import SettingsScreen from "../Components/SettingsScreen";
 
 //MUI
 import { withStyles } from "@material-ui/styles";
@@ -12,6 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
+import IconButton from "@material-ui/core/IconButton";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -487,7 +488,7 @@ function Dashboard(props) {
 
   const [open, setOpen] = React.useState(null);
 
-  const handleCard = category => {
+  const handleView = category => {
     setOpen(category);
   };
 
@@ -505,7 +506,9 @@ function Dashboard(props) {
         anchor="left"
       >
         <div className={classes.avatar}>
-          <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary} />
+          <IconButton size="small" onClick={() => handleView('settings')}>
+          <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary}  />
+          </IconButton>
         </div>
         <div className={classes.monthSelector}>
           <FontAwesomeIcon icon={faAngleLeft} size="2x" color={primary} />
@@ -514,45 +517,45 @@ function Dashboard(props) {
         </div>
         <Divider />
         <div className={classes.chartGroup}>
-          <GroupButton fullWidth size="small" onClick={() => handleCard('income')}>
+          <GroupButton fullWidth size="small" onClick={() => handleView('income')}>
             <FontAwesomeIcon icon={faHandHoldingUsd} size="2x" color={primary} />
             <Typography variant="body1">Income</Typography>
           </GroupButton>
           <div>
-            <GroupButton fullWidth size="small" onClick={() => handleCard('expenses')}>
+            <GroupButton fullWidth size="small" onClick={() => handleView('expenses')}>
               <FontAwesomeIcon icon={faFileInvoiceDollar} size="2x" color={primary} />
               <Typography variant="body1">Expenses</Typography>
             </GroupButton>
             <div className={classes.chartSubgroup}>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('financial')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('financial')}>
                 <FontAwesomeIcon icon={faCoins} size="2x" color={primary} />
                 <Typography variant="body1">Financial</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('housing')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('housing')}>
                 <FontAwesomeIcon icon={faHome} size="2x" color={primary} />
                 <Typography variant="body1">Housing</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('health')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('health')}>
                 <FontAwesomeIcon icon={faMedkit} size="2x" color={primary} />
                 <Typography variant="body1">Health</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('transport')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('transport')}>
                 <FontAwesomeIcon icon={faCar} size="2x" color={primary} />
                 <Typography variant="body1">Transport</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('personal')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('personal')}>
                 <FontAwesomeIcon icon={faMale} size="2x" color={primary} />
                 <Typography variant="body1">Personal</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('dependant')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('dependant')}>
                 <FontAwesomeIcon icon={faChild} size="2x" color={primary} />
                 <Typography variant="body1">Dependant</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('pet')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('pet')}>
                 <FontAwesomeIcon icon={faPaw} size="2x" color={primary} />
                 <Typography variant="body1">Pet</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleCard('leisure')}>
+              <SubgroupButton fullWidth size="small" onClick={() => handleView('leisure')}>
                 <FontAwesomeIcon icon={faUmbrellaBeach} size="2x" color={primary} />
                 <Typography variant="body1">Leisure</Typography>
               </SubgroupButton>
@@ -628,6 +631,9 @@ function Dashboard(props) {
           </div>
           )
         }
+        {open === null && <WelcomeMessage/>}
+        {open === 'settings' && <SettingsScreen/>}
+        
       </Container>
     </div>
   );
