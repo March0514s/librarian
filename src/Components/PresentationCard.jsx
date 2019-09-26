@@ -71,7 +71,7 @@ function PresentationCard(props) {
         <CardContent className={classes.inside}>
           {props.icon ? 
           <div>
-              <FontAwesomeIcon icon={props.icon} size="6x" />
+              <FontAwesomeIcon icon={props.icon} size="6x" color="gray"/>
           </div> :
           null
           }

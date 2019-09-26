@@ -80,7 +80,8 @@ const style = theme => ({
     paddingBottom: "80px",
     "& h3": {
       marginBottom: "20px",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      color: "rgb(206, 197, 70)"
     },
     "& div": {
       marginLeft: "100px",

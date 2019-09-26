@@ -48,7 +48,13 @@ outside: {
 const FakeButton = withStyles(theme => ({
   root: {
     marginTop: "15px",
-    height: "60px"
+    height: "60px",
+    backgroundColor: "rgb(206, 197, 70)",
+    color: 'white',
+    '&:disabled': {
+      backgroundColor: "rgb(206, 197, 70)",
+      color: "white"
+    }
   }
 }))(Button);
 
@@ -88,7 +94,7 @@ function LoginCard(props) {
                   shrink: true
                 }}
               />
-              <FakeButton variant="contained" color="primary" size="large">
+              <FakeButton variant="contained" disabled size="large">
                 <KeyIcon />
               </FakeButton>
             </CardContent>
