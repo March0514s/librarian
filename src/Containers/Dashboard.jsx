@@ -1,4 +1,6 @@
-import React, { Fragment } from "react";
+import React, { useState, useEffect } from "react";
+import firebase from "../Components/Firebase/Firebase";
+import { Auth } from '../Context/authContext';
 
 import CardWindow from "../Components/CardWindow";
 import ModalTarget from "../Components/ModalTarget";
@@ -16,409 +18,398 @@ import IconButton from "@material-ui/core/IconButton";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandHoldingUsd, faUmbrellaBeach } from "@fortawesome/free-solid-svg-icons";
-import { faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { faReceipt } from "@fortawesome/free-solid-svg-icons";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { faMedkit } from "@fortawesome/free-solid-svg-icons";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
-import { faMale } from "@fortawesome/free-solid-svg-icons";
-import { faChild } from "@fortawesome/free-solid-svg-icons";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-
+import { faFileInvoiceDollar, faCamera, faReceipt, faCoins, faHome, faMedkit,
+         faCar, faMale, faChild, faPaw, faAngleLeft, faAngleRight, faPowerOff, 
+         faUserCircle, faHandHoldingUsd, faUmbrellaBeach } 
+from "@fortawesome/free-solid-svg-icons" ;
 
 // Table test objects
 const incomeTable = {
-  tableName: 'Income',
+  tableName: "Income",
   tableIcon: faHandHoldingUsd,
   tableRows: [
-     {
-      name: 'Salário',
+    {
+      name: "Salário",
       value: 0
     },
-     {
-      name: '13º Salário',
+    {
+      name: "13º Salário",
       value: 0
     },
-     {
-      name: 'Férias',
+    {
+      name: "Férias",
       value: 0
     },
-     {
-      name: 'Aluguéis',
+    {
+      name: "Aluguéis",
       value: 0
     },
-     {
-      name: 'Resgate',
+    {
+      name: "Resgate",
       value: 0
     },
-     {
-      name: 'Renda Extra',
+    {
+      name: "Renda Extra",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const financialTable = {
-  tableName: 'Financial Expenses',
+  tableName: "Financial Expenses",
   tableIcon: faCoins,
   tableRows: [
-     {
-      name: 'Ações',
+    {
+      name: "Ações",
       value: 0
     },
-     {
-      name: 'LCI, LCA, CDB',
+    {
+      name: "LCI, LCA, CDB",
       value: 0
     },
-     {
-      name: 'Previdência Privada',
+    {
+      name: "Previdência Privada",
       value: 0
     },
-     {
-      name: 'Fundos de Investimentos',
+    {
+      name: "Fundos de Investimentos",
       value: 0
     },
-     {
-      name: 'Tesouro Direto',
+    {
+      name: "Tesouro Direto",
       value: 0
     },
-     {
-      name: 'Empréstimos (pagos)',
+    {
+      name: "Empréstimos (pagos)",
       value: 0
     },
-     {
-      name: 'Tarifas Bancárias',
+    {
+      name: "Tarifas Bancárias",
       value: 0
     },
-     {
-      name: 'Outro',
+    {
+      name: "Outro",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const housingTable = {
-  tableName: 'Housing Expenses',
+  tableName: "Housing Expenses",
   tableIcon: faHome,
   tableRows: [
-     {
-      name: 'Aluguel/Prestação',
+    {
+      name: "Aluguel/Prestação",
       value: 0
     },
-     {
-      name: 'Condomínio',
+    {
+      name: "Condomínio",
       value: 0
     },
-     {
-      name: 'IPTU',
+    {
+      name: "IPTU",
       value: 0
     },
-     {
-      name: 'Luz',
+    {
+      name: "Luz",
       value: 0
     },
-     {
-      name: 'Telefones',
+    {
+      name: "Telefones",
       value: 0
     },
-     {
-      name: 'Internet',
+    {
+      name: "Internet",
       value: 0
     },
-     {
-      name: 'Gás',
+    {
+      name: "Gás",
       value: 0
     },
-     {
-      name: 'TV por assinatura/Netflix',
+    {
+      name: "TV por assinatura/Netflix",
       value: 0
     },
-     {
-      name: 'Supermercado/feira/açougue/padaria',
+    {
+      name: "Supermercado/feira/açougue/padaria",
       value: 0
     },
-     {
-      name: 'Empregados',
+    {
+      name: "Empregados",
       value: 0
     },
-     {
-      name: 'Reforma/Consertos',
+    {
+      name: "Reforma/Consertos",
       value: 0
     },
-     {
-      name: 'Seguro de casa',
+    {
+      name: "Seguro de casa",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const healthTable = {
-  tableName: 'Health Expenses',
+  tableName: "Health Expenses",
   tableIcon: faMedkit,
   tableRows: [
-     {
-      name: 'Plano de Saúde',
+    {
+      name: "Plano de Saúde",
       value: 0
     },
-     {
-      name: 'Médico',
+    {
+      name: "Médico",
       value: 0
     },
-     {
-      name: 'Dentista',
+    {
+      name: "Dentista",
       value: 0
     },
-     {
-      name: 'Terapia',
+    {
+      name: "Terapia",
       value: 0
     },
-     {
-      name: 'Medicamentos',
+    {
+      name: "Medicamentos",
       value: 0
     },
-     {
-      name: 'Exames',
+    {
+      name: "Exames",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
 };
 
 const transportTable = {
-  tableName: 'Transport Expenses',
+  tableName: "Transport Expenses",
   tableIcon: faCar,
   tableRows: [
-     {
-      name: 'Ônibus/Metrô/Trem',
+    {
+      name: "Ônibus/Metrô/Trem",
       value: 0
     },
-     {
-      name: 'Táxi/Uber',
+    {
+      name: "Táxi/Uber",
       value: 0
     },
-     {
-      name: 'Prestação',
+    {
+      name: "Prestação",
       value: 0
     },
-     {
-      name: 'Seguro de carro/moto',
+    {
+      name: "Seguro de carro/moto",
       value: 0
     },
-     {
-      name: 'Combustível',
+    {
+      name: "Combustível",
       value: 0
     },
-     {
-      name: 'Lavagens',
+    {
+      name: "Lavagens",
       value: 0
     },
-     {
-      name: 'IPVA/DPVAT/Licenciamento',
+    {
+      name: "IPVA/DPVAT/Licenciamento",
       value: 0
     },
-     {
-      name: 'Mecânico',
+    {
+      name: "Mecânico",
       value: 0
     },
-     {
-      name: 'Multas',
+    {
+      name: "Multas",
       value: 0
     },
-     {
-      name: 'Estacionamentos',
+    {
+      name: "Estacionamentos",
       value: 0
     },
-     {
-      name: 'Pedágios/Sem Parar',
+    {
+      name: "Pedágios/Sem Parar",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const personalTable = {
-  tableName: 'Personal Expenses',
+  tableName: "Personal Expenses",
   tableIcon: faMale,
   tableRows: [
-     {
-      name: 'Higiene Pessoal',
+    {
+      name: "Higiene Pessoal",
       value: 0
     },
-     {
-      name: 'Cosméticos',
+    {
+      name: "Cosméticos",
       value: 0
     },
-     {
-      name: 'Cabelereiro',
+    {
+      name: "Cabelereiro",
       value: 0
     },
-     {
-      name: 'Vestuário',
+    {
+      name: "Vestuário",
       value: 0
     },
-     {
-      name: 'Lavanderia',
+    {
+      name: "Lavanderia",
       value: 0
     },
-     {
-      name: 'Academia',
+    {
+      name: "Academia",
       value: 0
     },
-     {
-      name: 'Cursos',
+    {
+      name: "Cursos",
       value: 0
     },
-     {
-      name: 'Presentes',
+    {
+      name: "Presentes",
       value: 0
     },
-     {
-      name: 'Doações',
+    {
+      name: "Doações",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const dependantTable = {
-  tableName: 'Dependant Expenses',
+  tableName: "Dependant Expenses",
   tableIcon: faChild,
   tableRows: [
-     {
-      name: 'Escola/faculdade',
+    {
+      name: "Escola/faculdade",
       value: 0
     },
-     {
-      name: 'Cursos extras',
+    {
+      name: "Cursos extras",
       value: 0
     },
-     {
-      name: 'Material escolar',
+    {
+      name: "Material escolar",
       value: 0
     },
-     {
-      name: 'Esportes/Uniformes',
+    {
+      name: "Esportes/Uniformes",
       value: 0
     },
-     {
-      name: 'Mesada',
+    {
+      name: "Mesada",
       value: 0
     },
-     {
-      name: 'Passeios/Férias',
+    {
+      name: "Passeios/Férias",
       value: 0
     },
-     {
-      name: 'Vestuário',
+    {
+      name: "Vestuário",
       value: 0
     },
-     {
-      name: 'Saúde/Medicamentos',
+    {
+      name: "Saúde/Medicamentos",
       value: 0
     },
-     {
-      name: 'Transporte',
+    {
+      name: "Transporte",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const petTable = {
-  tableName: 'Pet Expenses',
+  tableName: "Pet Expenses",
   tableIcon: faPaw,
   tableRows: [
-     {
-      name: 'Petshop',
+    {
+      name: "Petshop",
       value: 0
     },
-     {
-      name: 'Ração',
+    {
+      name: "Ração",
       value: 0
     },
-     {
-      name: 'Veterinário',
+    {
+      name: "Veterinário",
       value: 0
     },
-     {
-      name: 'Medicamentos',
+    {
+      name: "Medicamentos",
       value: 0
     },
-     {
-      name: 'Vacinas',
+    {
+      name: "Vacinas",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const leisureTable = {
-  tableName: 'Leisure Expenses',
+  tableName: "Leisure Expenses",
   tableIcon: faUmbrellaBeach,
   tableRows: [
-     {
-      name: 'Restaurantes',
+    {
+      name: "Restaurantes",
       value: 0
     },
-     {
-      name: 'Café/Sorveteria',
+    {
+      name: "Café/Sorveteria",
       value: 0
     },
-     {
-      name: 'Bares/Boates',
+    {
+      name: "Bares/Boates",
       value: 0
     },
-     {
-      name: 'Livraria',
+    {
+      name: "Livraria",
       value: 0
     },
-     {
-      name: 'Passagens',
+    {
+      name: "Passagens",
       value: 0
     },
-     {
-      name: 'Hotéis',
+    {
+      name: "Hotéis",
       value: 0
     },
-     {
-      name: 'Passeios',
+    {
+      name: "Passeios",
       value: 0
     },
-     {
-      name: 'Outros',
+    {
+      name: "Outros",
       value: 0
-    },
+    }
   ]
-}; 
+};
 
 const style = theme => ({
   root: {
@@ -427,12 +418,12 @@ const style = theme => ({
   },
   drawer: {
     width: "280px",
-    hidden: 'true'
+    hidden: "true"
   },
   chartGroup: {
     "& p": {
       marginLeft: "20px",
-      marginTop: "10px",
+      marginTop: "10px"
     },
     "& svg": {
       marginLeft: "10px"
@@ -446,7 +437,6 @@ const style = theme => ({
   },
   chartSubgroup: {
     "& p": {
-      
       marginLeft: "15px",
       marginTop: "8px",
       marginBottom: "8px"
@@ -461,8 +451,13 @@ const style = theme => ({
     marginTop: "10px"
   },
   container: {
-    marginLeft: '235px',
-    marginTop: '20px',
+    marginLeft: "235px",
+    marginTop: "20px"
+  },
+  powerOffButton: {
+    position: "absolute",
+    top: "5px",
+    left: "165px"
   }
 });
 
@@ -481,12 +476,36 @@ const SubgroupButton = withStyles(theme => ({
   }
 }))(Button);
 
-const primary = 'rgb(206, 197, 70)';
+const primary = "rgb(206, 197, 70)";
 
 function Dashboard(props) {
   const { classes } = props;
 
-  const [open, setOpen] = React.useState(null);
+  const [userState, setUserState] = useState(null);
+  const {state, dispatch} = React.useContext(Auth);
+
+  //TODO: Move hook to <App> and save its data into context
+  useEffect(() => {
+    firebase.getUserState().then(user => {
+      if (user) {
+        setUserState(user);
+      }
+    });
+  }, []);
+
+  const logout = () => {
+    firebase.logout();
+    setUserState(null);
+    props.history.replace("/login");
+    return dispatch({
+      type: "LOGOUT",
+      payload: {}
+    });
+  };
+
+  //TODO:Get user data from context for each component that requires
+
+  const [open, setOpen] = useState(null);
 
   const handleView = category => {
     setOpen(category);
@@ -506,8 +525,15 @@ function Dashboard(props) {
         anchor="left"
       >
         <div className={classes.avatar}>
-          <IconButton size="small" onClick={() => handleView('settings')}>
-          <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary}  />
+          <IconButton size="small" onClick={() => handleView("settings")}>
+            <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary} />
+          </IconButton>
+          <IconButton
+            className={classes.powerOffButton}
+            aria-label="settings"
+            size="small"
+          >
+            <FontAwesomeIcon icon={faPowerOff} onClick={() => logout()}/>
           </IconButton>
         </div>
         <div className={classes.monthSelector}>
@@ -517,46 +543,98 @@ function Dashboard(props) {
         </div>
         <Divider />
         <div className={classes.chartGroup}>
-          <GroupButton fullWidth size="small" onClick={() => handleView('income')}>
-            <FontAwesomeIcon icon={faHandHoldingUsd} size="2x" color={primary} />
+          <GroupButton
+            fullWidth
+            size="small"
+            onClick={() => handleView("income")}
+          >
+            <FontAwesomeIcon
+              icon={faHandHoldingUsd}
+              size="2x"
+              color={primary}
+            />
             <Typography variant="body1">Income</Typography>
           </GroupButton>
           <div>
-            <GroupButton fullWidth size="small" onClick={() => handleView('expenses')}>
-              <FontAwesomeIcon icon={faFileInvoiceDollar} size="2x" color={primary} />
+            <GroupButton
+              fullWidth
+              size="small"
+              onClick={() => handleView("expenses")}
+            >
+              <FontAwesomeIcon
+                icon={faFileInvoiceDollar}
+                size="2x"
+                color={primary}
+              />
               <Typography variant="body1">Expenses</Typography>
             </GroupButton>
             <div className={classes.chartSubgroup}>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('financial')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("financial")}
+              >
                 <FontAwesomeIcon icon={faCoins} size="2x" color={primary} />
                 <Typography variant="body1">Financial</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('housing')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("housing")}
+              >
                 <FontAwesomeIcon icon={faHome} size="2x" color={primary} />
                 <Typography variant="body1">Housing</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('health')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("health")}
+              >
                 <FontAwesomeIcon icon={faMedkit} size="2x" color={primary} />
                 <Typography variant="body1">Health</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('transport')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("transport")}
+              >
                 <FontAwesomeIcon icon={faCar} size="2x" color={primary} />
                 <Typography variant="body1">Transport</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('personal')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("personal")}
+              >
                 <FontAwesomeIcon icon={faMale} size="2x" color={primary} />
                 <Typography variant="body1">Personal</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('dependant')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("dependant")}
+              >
                 <FontAwesomeIcon icon={faChild} size="2x" color={primary} />
                 <Typography variant="body1">Dependant</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('pet')}>
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("pet")}
+              >
                 <FontAwesomeIcon icon={faPaw} size="2x" color={primary} />
                 <Typography variant="body1">Pet</Typography>
               </SubgroupButton>
-              <SubgroupButton fullWidth size="small" onClick={() => handleView('leisure')}>
-                <FontAwesomeIcon icon={faUmbrellaBeach} size="2x" color={primary} />
+              <SubgroupButton
+                fullWidth
+                size="small"
+                onClick={() => handleView("leisure")}
+              >
+                <FontAwesomeIcon
+                  icon={faUmbrellaBeach}
+                  size="2x"
+                  color={primary}
+                />
                 <Typography variant="body1">Leisure</Typography>
               </SubgroupButton>
             </div>
@@ -572,68 +650,45 @@ function Dashboard(props) {
         </div>
       </Drawer>
       <Container className={classes.container}>
-        {
-          open === 'income' && (
-          <CardWindow table={incomeTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'financial' && (
-          <CardWindow table={financialTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'housing' && (
-          <CardWindow table={housingTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'health' && (
-          <CardWindow table={healthTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'transport' && (
-          <CardWindow table={transportTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'personal' && (
-          <CardWindow table={personalTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'dependant' && (
-          <CardWindow table={dependantTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'pet' && (
-          <CardWindow table={petTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'leisure' && (
-          <CardWindow table={leisureTable} close={handleClose}/>
-          )
-        }
-        {
-          open === 'expenses' && (
+        {open === "income" && (
+          <CardWindow table={incomeTable} close={handleClose} />
+        )}
+        {open === "financial" && (
+          <CardWindow table={financialTable} close={handleClose} />
+        )}
+        {open === "housing" && (
+          <CardWindow table={housingTable} close={handleClose} />
+        )}
+        {open === "health" && (
+          <CardWindow table={healthTable} close={handleClose} />
+        )}
+        {open === "transport" && (
+          <CardWindow table={transportTable} close={handleClose} />
+        )}
+        {open === "personal" && (
+          <CardWindow table={personalTable} close={handleClose} />
+        )}
+        {open === "dependant" && (
+          <CardWindow table={dependantTable} close={handleClose} />
+        )}
+        {open === "pet" && <CardWindow table={petTable} close={handleClose} />}
+        {open === "leisure" && (
+          <CardWindow table={leisureTable} close={handleClose} />
+        )}
+        {open === "expenses" && (
           <div>
-            <CardWindow table={financialTable}/>
-            <CardWindow table={housingTable}/>
-            <CardWindow table={healthTable}/>
-            <CardWindow table={transportTable}/>
-            <CardWindow table={personalTable}/>
-            <CardWindow table={dependantTable}/>
-            <CardWindow table={petTable}/>
-            <CardWindow table={leisureTable}/>
+            <CardWindow table={financialTable} />
+            <CardWindow table={housingTable} />
+            <CardWindow table={healthTable} />
+            <CardWindow table={transportTable} />
+            <CardWindow table={personalTable} />
+            <CardWindow table={dependantTable} />
+            <CardWindow table={petTable} />
+            <CardWindow table={leisureTable} />
           </div>
-          )
-        }
-        {open === null && <WelcomeMessage/>}
-        {open === 'settings' && <SettingsScreen/>}
-        
+        )}
+        {open === null && <WelcomeMessage />}
+        {open === "settings" && <SettingsScreen />}
       </Container>
     </div>
   );

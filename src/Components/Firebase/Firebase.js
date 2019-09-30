@@ -4,11 +4,9 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import { config } from './Config';
 
-console.log(firebase);
-
 class Firebase{
     constructor(){
-        firebase.initalizeApp(config);
+        firebase.initializeApp(config);
         this.auth = firebase.auth();
         this.db = firebase.firestore();
     }
@@ -42,6 +40,13 @@ class Firebase{
             return err;
         });
         return logout;
+    }
+
+    //USER STATE
+    async getUserState(){
+        return new Promise( resolve => {
+            this.auth.onAuthStateChanged(resolve);
+        });
     }
 }
 

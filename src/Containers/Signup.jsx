@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import firebase from "../Components/Firebase/Firebase";
 import { Auth } from "../Context/authContext";
 
 //MUI
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
@@ -63,6 +62,7 @@ const Signup = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
+  const [routeRedirect, setRouteRedirect] = useState(false);
 
   const { state, dispatch } = React.useContext(Auth);
 
@@ -73,17 +73,24 @@ const Signup = props => {
     if (response.hasOwnProperty("message")) {
       console.log(response.message);
     } else {
-      console.log(response.user);
+      //console.log(response.user);
+      setRouteRedirect(true);
       return dispatch({
         type: "SIGNUP",
-        payload: response
+        payload: response.user
       });
     }
   };
 
+  const redirect = routeRedirect;
+  if (redirect) {
+    return <Redirect to="/login" />;
+  } 
+
+
   return (
-    <Container className={classes.root}>
-      <form onSubmit={signup}>
+    <React.Fragment >
+      <form className={classes.root} onSubmit={signup}>
         <Typography variant="subtitle1">Welcome to</Typography>
         <Link to={"/"}>
           <Typography variant="h3">Librarian</Typography>
@@ -94,8 +101,6 @@ const Signup = props => {
               <TextField
                 id="outlined-name"
                 label="Name"
-                //   className={}
-                //   value={}
                 onChange={(e) => setUsername(e.target.value)}
                 margin="normal"
                 variant="outlined"
@@ -103,8 +108,6 @@ const Signup = props => {
               <TextField
                 id="outlined-name"
                 label="Email"
-                //   className={}
-                //   value={}
                 onChange={(e) => setEmail(e.target.value)}
                 margin="normal"
                 variant="outlined"
@@ -112,20 +115,18 @@ const Signup = props => {
               <TextField
                 id="outlined-name"
                 label="Password"
-                //   className={}
-                //   value={}
                 onChange={(e) => setPassword(e.target.value)}
                 margin="normal"
                 variant="outlined"
+                type="password"
               />
               <TextField
                 id="outlined-name"
                 label="Confirm Password"
-                //   className={}
-                //   value={}
                 onChange={(e) => setConfirmationPassword(e.target.value)}
                 margin="normal"
                 variant="outlined"
+                type="password"
               />
               <LoginButton type="submit" variant="contained" color="primary" size="large">
                 Signup
@@ -139,7 +140,7 @@ const Signup = props => {
           </Link>
         </div>
       </form>
-    </Container>
+    </React.Fragment>
   );
 };
 
