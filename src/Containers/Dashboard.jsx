@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Components/Firebase/Firebase";
 import { Auth } from '../Context/authContext';
+import { Redirect } from 'react-router-dom';
 
 import CardWindow from "../Components/CardWindow";
 import ModalTarget from "../Components/ModalTarget";
@@ -489,6 +490,10 @@ function Dashboard(props) {
     firebase.getUserState().then(user => {
       if (user) {
         setUserState(user);
+      }
+      else{
+        //TODO: Protect route from unauthorized access
+        // logout();
       }
     });
   }, []);
