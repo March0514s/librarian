@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Auth } from "../Context/authContext";
 
 //MUI
 import Typography from "@material-ui/core/Typography";
@@ -18,6 +19,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+
 
 
 const style = theme => ({
@@ -116,7 +118,6 @@ const SaveButton = withStyles(theme => ({
       backgroundColor: 'rgb(206, 197, 70)',
       color: 'white',
       textTransform: 'uppercase',
-      marginTop: '20px',
       paddingLeft: '40px',
       paddingRight: '40px',
       "&:hover": {
@@ -127,11 +128,17 @@ const SaveButton = withStyles(theme => ({
 
 function SettingsScreen(props) {
   const { classes } = props;
+
+  const { state } = useContext(Auth);
+  console.log(state)
+
+  // console.log(state.user);
+
   return (
-    <div className={classes.root}>
+    <form className={classes.root}>
         <Typography variant='h6' align="center">Control Panel</Typography>
         {/* <Divider /> */}
-      <div className={classes.settings}>
+        <div className={classes.settings}>
         <Avatar
           alt="Remy Sharp"
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -147,7 +154,7 @@ function SettingsScreen(props) {
               id="outlined-name"
               //   label="Password"
               //   className={}
-              value={"Username"}
+              value={state.user.displayName}
               //   onChange={}
               margin="normal"
               variant="outlined"
@@ -160,7 +167,7 @@ function SettingsScreen(props) {
               id="outlined-email"
               //   label="Password"
               //   className={}
-              value={"user@email.com"}
+              value={state.user.email}
               //   onChange={}
               margin="normal"
               variant="outlined"
@@ -211,9 +218,9 @@ function SettingsScreen(props) {
         </Typography>
         </div>
         <div className={classes.save}>
-        <SaveButton>save</SaveButton>
+        <SaveButton type='submit'>save</SaveButton>
       </div>
-    </div>
+    </form>
   );
 }
 

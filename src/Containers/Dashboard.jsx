@@ -487,13 +487,10 @@ function Dashboard(props) {
 
   //TODO: Move hook to <App> and save its data into context
   useEffect(() => {
+    console.log(state);
     firebase.getUserState().then(user => {
       if (user) {
         setUserState(user);
-      }
-      else{
-        //TODO: Protect route from unauthorized access
-        // logout();
       }
     });
   }, []);

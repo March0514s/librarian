@@ -14,13 +14,10 @@ let userState = null; //?
 firebase.getUserState().then(user => userState = user); //?
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-    
-    
     <Route
     {...rest}
     render={props => userState ?  (<Component {...props}/>) : (<Redirect to={{pathname: '/login'}}/>)} 
     />
-
 )
 
 const Routes = () => {
