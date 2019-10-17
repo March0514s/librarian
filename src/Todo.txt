@@ -1,0 +1,9 @@
+Dashboard
+1- Fetch user avatar - ok
+2- Fetch tables
+
+User Settings
+1- Fetch user data - ok
+2- Change user data(avatar, name, email)
+4- Toggle email notifications
+5- Fetch resume

@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import CardWindow from "../Components/CardWindow";
 import ModalTarget from "../Components/ModalTarget";
 import WelcomeMessage from "../Components/WelcomeMessage";
-import SettingsScreen from "../Components/SettingsScreen";
+import SettingsScreen from "./SettingsScreen";
 
 //MUI
 import { withStyles } from "@material-ui/styles";
@@ -16,6 +16,8 @@ import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
+import Avatar from "@material-ui/core/Avatar";
+
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -430,6 +432,10 @@ const style = theme => ({
       marginLeft: "10px"
     }
   },
+  smallAvatar: {
+    width: 60,
+    height: 60,
+  },
   monthSelector: {
     display: "flex",
     justifyContent: "center",
@@ -449,7 +455,7 @@ const style = theme => ({
   avatar: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "10px"
+    marginTop: "10px",
   },
   container: {
     marginLeft: "235px",
@@ -517,6 +523,8 @@ function Dashboard(props) {
     setOpen(null);
   };
 
+
+
   return (
     <div className={classes.root}>
       <Drawer
@@ -528,7 +536,12 @@ function Dashboard(props) {
       >
         <div className={classes.avatar}>
           <IconButton size="small" onClick={() => handleView("settings")}>
-            <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary} />
+            {/* <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary} /> */}
+            <Avatar
+          alt="Remy Sharp"
+          src={state.user.photoURL ? state.user.photoURL : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" }
+          className={classes.smallAvatar}
+        />
           </IconButton>
           <IconButton
             className={classes.powerOffButton}

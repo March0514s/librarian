@@ -9,6 +9,7 @@ class Firebase{
         firebase.initializeApp(config);
         this.auth = firebase.auth();
         this.db = firebase.firestore();
+        this.storage = firebase.storage();
     }
 
     //LOGIN
@@ -48,6 +49,17 @@ class Firebase{
             this.auth.onAuthStateChanged(resolve);
         });
     }
+
+    async updateProfilePicture(name){
+        let nameFixed = name.replace(/\//g,'%2F');
+        let fullURL = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${nameFixed}?alt=media`;
+        return this.auth.currentUser.updateProfile({
+          photoURL: fullURL
+        })
+        .then(() => {
+          return fullURL;
+        });
+      }
 }
 
 export default new Firebase();

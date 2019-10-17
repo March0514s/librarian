@@ -12,7 +12,7 @@ const style = theme => ({
   }
 });
 
-function App(props) {
+const App = (props) => {
   const { classes } = props;
 
   return (

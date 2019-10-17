@@ -58,7 +58,7 @@ const LoginButton = withStyles(theme => ({
 const Signup = props => {
   const { classes } = props;
 
-  const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
@@ -101,7 +101,7 @@ const Signup = props => {
               <TextField
                 id="outlined-name"
                 label="Name"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setDisplayName(e.target.value)}
                 margin="normal"
                 variant="outlined"
               />

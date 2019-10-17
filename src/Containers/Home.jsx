@@ -123,7 +123,7 @@ const style = theme => ({
     marginBottom: "10px",
     marginLeft: "80px",
     marginRight: "80px",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   socialMedia: {
     "& svg": {

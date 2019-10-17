@@ -107,14 +107,12 @@ const Login = props => {
           <CardContent>
             <div className={classes.inside}>
               <TextField
-                id="outlined-name"
                 label="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 margin="normal"
                 variant="outlined"
               />
               <TextField
-                id="outlined-name"
                 label="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 margin="normal"
