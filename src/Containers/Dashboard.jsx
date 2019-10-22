@@ -523,6 +523,7 @@ function Dashboard(props) {
     setOpen(null);
   };
 
+  console.log(firebase.getCurrentUserCreationTime());
 
 
   return (
@@ -538,8 +539,8 @@ function Dashboard(props) {
           <IconButton size="small" onClick={() => handleView("settings")}>
             {/* <FontAwesomeIcon icon={faUserCircle} size="3x" color={primary} /> */}
             <Avatar
-          alt="Remy Sharp"
-          src={state.user.photoURL ? state.user.photoURL : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" }
+          alt={state.user.name}
+          src={ state.user.photoURL ? state.user.photoURL : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" }
           className={classes.smallAvatar}
         />
           </IconButton>
@@ -552,9 +553,9 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <div className={classes.monthSelector}>
-          <FontAwesomeIcon icon={faAngleLeft} size="2x" color={primary} />
+          <FontAwesomeIcon onClick={() => console.log('previous')}icon={faAngleLeft} size="2x" color={primary}/>
           <Typography variant="h6">SET/2019</Typography>
-          <FontAwesomeIcon icon={faAngleRight} size="2x" color={primary} />
+          <FontAwesomeIcon onClick={() => console.log('next')}icon={faAngleRight} size="2x" color={primary}/>
         </div>
         <Divider />
         <div className={classes.chartGroup}>

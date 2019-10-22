@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Auth } from "../Context/authContext";
-import firebase from '../Components/Firebase/Firebase';
-import moment from 'moment';
+import firebase from "../Components/Firebase/Firebase";
+import moment from "moment";
 
 //MUI
 import Typography from "@material-ui/core/Typography";
@@ -130,61 +130,37 @@ function SettingsScreen(props) {
   const { state } = useContext(Auth);
 
   //Profile State
-  const [profileChanged, setProfileChanged] = React.useState(false);
-  const [userName, setUserName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [avatar, setAvatar] = React.useState(null);
-  const [emailNotifications, toggleEmailNotifications] = React.useState(true);
+  const [profileChanged, setProfileChanged] = React.useState({
+    username: false,
+    email: false,
+    avatar: false
+  });
   
-  const [values, setValues] = React.useState({
-    displayName: '',
-    photoURL: '',
-    email: '',
+  const [profileData, setProfileData] = React.useState({
+    displayName: null,
+    photoURL: null,
+    email: null
   });
 
+  const [emailNotifications, toggleEmailNotifications] = React.useState(true);
 
   //Update profile
   const handleSubmit = e => {
     e.preventDefault();
-
-    state.user
-      .updateProfile({
-        displayName: userName,
-        photoURL: avatar
-      })
-      .then(() => !profileChanged)
-      .catch(err => console.log(err));
-
-    state.user
-      .updateEmail(email)
-      .then(() => !profileChanged)
-      .catch(err => console.log(err));
+    firebase
+      .updateProfileData(profileData)
+      .then(setProfileChanged({ usernameAndEmail: false, avatar: false }));
   };
 
-  const handleImageChange = e => {
-   const date = moment().format("YYYYMMDD-HHMMSS");
-   const image = e.target.files[0];
-   const store = firebase.storage.ref();
-   const imageExtension = `.${e.target.files[0].name.split('.').pop()}`
-   const imageName = `user-images/${state.user.uid}/${date}${imageExtension}`;
-   const userPhoto = store.child(imageName).put(image)
-   .then( snapshot => {
-     console.log('snapshot.name: ', snapshot);
-     console.log('snapshot.name: ', snapshot.metadata.fullPath);
-     firebase.updateProfilePicture(snapshot.metadata.fullPath)
-     .then(() => !profileChanged)
-     .then(fullURL => {
-       const oldImage = values.photoURL.split('./o/').pop().split('?')[0].replace(/%2F/g,'/');
-       if (oldImage !== 'user-images/no-img.png'){
-         store.child(oldImage).delete();
-       }
-       setValues({...values, photoURL: fullURL});
-     })
-   })
+  const handleImageChange = async e => {
+    firebase
+      .uploadProfilePicture(e.target.files[0])
+      .then(resolve => setProfileData({ ...profileData, photoURL: resolve }))
+      .then(setProfileChanged({ ...profileChanged, avatar: true }));
   };
 
   const handleEditPicture = () => {
-    const fileInput = document.getElementById('imageInput');
+    const fileInput = document.getElementById("imageInput");
     fileInput.click();
   };
 
@@ -197,7 +173,7 @@ function SettingsScreen(props) {
       <div className={classes.settings}>
         <Avatar
           alt={state.user.displayName}
-          src={state.user.photoURL ? state.user.photoURL : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" }
+          src={profileChanged.avatar ? profileData.photoURL : state.user.photoURL ? state.user.photoURL : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" }
           className={classes.bigAvatar}
         />
         <IconButton
@@ -206,12 +182,12 @@ function SettingsScreen(props) {
           aria-label="edit"
           size="small"
         >
-        <input
-          type="file"
-          id="imageInput"
-          hidden="hidden"
-          onChange={handleImageChange}
-        />
+          <input
+            type="file"
+            id="imageInput"
+            hidden="hidden"
+            onChange={handleImageChange}
+          />
           <FontAwesomeIcon icon={faPen} />
         </IconButton>
         <div className={classes.formSettings}>
@@ -219,12 +195,11 @@ function SettingsScreen(props) {
             <Typography variant="overline">Your Name</Typography>
             <TextField
               placeholder={
-                state.user.displayName ? state.user.displayName : "Full Name"
+                profileChanged.username ? profileData.displayName : state.user.displayName ? state.user.displayName : "Full Name"
               }
               onChange={e => {
-                setProfileChanged(true);
-                console.log("profileChanged");
-                setUserName(e.target.value);
+                setProfileChanged({...profileChanged, username: true});
+                setProfileData({...profileData, displayName: e.target.value});
               }}
               margin="normal"
               variant="outlined"
@@ -234,10 +209,10 @@ function SettingsScreen(props) {
           <div>
             <Typography variant="overline">Email</Typography>
             <TextField
-              placeholder={state.user.email}
+              placeholder={profileChanged.email ? profileData.email : state.user.email }
               onChange={e => {
-                setProfileChanged(true);
-                setEmail(e.target.value);
+                setProfileChanged({...profileChanged, email: true });
+                setProfileData({...profileData, email: e.target.value});
               }}
               margin="normal"
               variant="outlined"
@@ -299,7 +274,7 @@ function SettingsScreen(props) {
         <SaveButton
           variant="contained"
           color="primary"
-          disabled={!profileChanged}
+          disabled={!( profileChanged.username || profileChanged.email || profileChanged.avatar )}
           type="submit"
         >
           save
