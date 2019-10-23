@@ -6,6 +6,8 @@ export const firebaseAuth = (state, action) => {
             return {...state, user: action.payload}
         case "LOGOUT":
             return {...state, user: action.payload}
+        case "PROFILE_CHANGED":
+            return {... state}
         default: 
             return state;
     }

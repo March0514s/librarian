@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Auth } from "../Context/authContext";
 import firebase from "../Components/Firebase/Firebase";
-import moment from "moment";
 
 //MUI
 import Typography from "@material-ui/core/Typography";
@@ -127,7 +126,9 @@ const SaveButton = withStyles(theme => ({
 
 function SettingsScreen(props) {
   const { classes } = props;
-  const { state } = useContext(Auth);
+  const { state, dispatch } = useContext(Auth);
+  console.log(state.user.photoURL);
+  setTimeout(() => console.log(state.user.photoURL), 10000);
 
   //Profile State
   const [profileChanged, setProfileChanged] = React.useState({
@@ -144,12 +145,15 @@ function SettingsScreen(props) {
 
   const [emailNotifications, toggleEmailNotifications] = React.useState(true);
 
+
+
   //Update profile
   const handleSubmit = e => {
     e.preventDefault();
     firebase
       .updateProfileData(profileData)
-      .then(setProfileChanged({ usernameAndEmail: false, avatar: false }));
+      .then(() => setProfileChanged({ username: false, email: false, avatar: false }))
+      .then(() => dispatch({type:'PROFILE_CHANGED'}));
   };
 
   const handleImageChange = async e => {

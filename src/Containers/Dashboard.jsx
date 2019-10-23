@@ -523,7 +523,7 @@ function Dashboard(props) {
     setOpen(null);
   };
 
-  console.log(firebase.getCurrentUserCreationTime());
+  // console.log(firebase.getCurrentUserCreationTime());
 
 
   return (

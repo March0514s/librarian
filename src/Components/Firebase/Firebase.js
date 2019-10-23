@@ -78,19 +78,19 @@ class Firebase{
     //UPDATE USER PROFILE
     async updateProfileData(profileData){
         if (profileData.displayName){
-            this.auth.currentUser.updateProfile({
+            await this.auth.currentUser.updateProfile({
                 displayName: profileData.displayName,
             });
         }
 
         if (profileData.photoURL){
-            this.auth.currentUser.updateProfile({
+            await this.auth.currentUser.updateProfile({
                 photoURL: profileData.photoURL,
             });
         }
 
         if (profileData.email){
-            this.auth.currentUser.updateEmail(
+            await this.auth.currentUser.updateEmail(
                 profileData.email,
             );
         }
