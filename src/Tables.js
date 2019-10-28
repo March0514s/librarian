@@ -1,6 +1,7 @@
-const incomeTable = {
+const tables = {
+  incomeTable: {
     tableName: 'Income',
-    tableIcon: faHandHoldingUsd,
+    tableIcon: 'faHandHoldingUsd',
     tableRows: [
        {
         name: 'Salário',
@@ -31,11 +32,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  }, 
   
-  const financialTable = {
+  financialTable: {
     tableName: 'Financial Expenses',
-    tableIcon: faCoins,
+    tableIcon: 'faCoins',
     tableRows: [
        {
         name: 'Ações',
@@ -70,11 +71,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  }, 
   
-  const housingTable = {
+  housingTable: {
     tableName: 'Housing Expenses',
-    tableIcon: faHome,
+    tableIcon: 'faHome',
     tableRows: [
        {
         name: 'Aluguel/Prestação',
@@ -129,11 +130,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  }, 
   
-  const healthTable = {
+  healthTable: {
     tableName: 'Health Expenses',
-    tableIcon: faMedkit,
+    tableIcon: 'faMedkit',
     tableRows: [
        {
         name: 'Plano de Saúde',
@@ -164,11 +165,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  };
+  },
   
-  const transportTable = {
+  transportTable: {
     tableName: 'Transport Expenses',
-    tableIcon: faCar,
+    tableIcon: 'faCar',
     tableRows: [
        {
         name: 'Ônibus/Metrô/Trem',
@@ -219,11 +220,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  },
   
-  const personalTable = {
+  personalTable: {
     tableName: 'Personal Expenses',
-    tableIcon: faMale,
+    tableIcon: 'faMale',
     tableRows: [
        {
         name: 'Higiene Pessoal',
@@ -266,11 +267,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  }, 
   
-  const dependantTable = {
+  dependantTable : {
     tableName: 'Dependant Expenses',
-    tableIcon: faChild,
+    tableIcon: 'faChild',
     tableRows: [
        {
         name: 'Escola/faculdade',
@@ -313,11 +314,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  }, 
   
-  const petTable = {
+  petTable : {
     tableName: 'Pet Expenses',
-    tableIcon: faPaw,
+    tableIcon: 'faPaw',
     tableRows: [
        {
         name: 'Petshop',
@@ -344,11 +345,11 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
+  }, 
   
-  const leisureTable = {
+  leisureTable : {
     tableName: 'Leisure Expenses',
-    tableIcon: faUmbrellaBeach,
+    tableIcon: 'faUmbrellaBeach',
     tableRows: [
        {
         name: 'Restaurantes',
@@ -383,19 +384,7 @@ const incomeTable = {
         value: 0
       },
     ]
-  }; 
-
-  const currentMonth = {
-      owner: 'user',
-      tables: [
-      incomeTable,
-      financialTable,
-      housingTable,
-      healthTable,
-      transportTable,
-      personalTable,
-      dependantTable,
-      petTable,
-      leisureTable
-    ]
+  }
 }
+
+export default tables;

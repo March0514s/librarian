@@ -205,7 +205,8 @@ function CardWindow(props) {
                       <RoundedTextField
                         id="outlined-bare"
                         className={classes.textField}
-                        defaultValue={x.value.toFixed(2)}
+                        // defaultValue={x.value.toFixed(2)}
+                        placeholder={x.value.toFixed(2)}
                         margin="normal"
                         variant="outlined"
                         inputProps={{ "aria-label": "bare" }}
