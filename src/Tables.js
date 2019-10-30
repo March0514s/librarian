@@ -1,7 +1,7 @@
+
 const tables = {
   incomeTable: {
     tableName: 'Income',
-    tableIcon: 'faHandHoldingUsd',
     tableRows: [
        {
         name: 'Salário',
@@ -36,7 +36,6 @@ const tables = {
   
   financialTable: {
     tableName: 'Financial Expenses',
-    tableIcon: 'faCoins',
     tableRows: [
        {
         name: 'Ações',
@@ -75,7 +74,6 @@ const tables = {
   
   housingTable: {
     tableName: 'Housing Expenses',
-    tableIcon: 'faHome',
     tableRows: [
        {
         name: 'Aluguel/Prestação',
@@ -134,7 +132,6 @@ const tables = {
   
   healthTable: {
     tableName: 'Health Expenses',
-    tableIcon: 'faMedkit',
     tableRows: [
        {
         name: 'Plano de Saúde',
@@ -169,7 +166,6 @@ const tables = {
   
   transportTable: {
     tableName: 'Transport Expenses',
-    tableIcon: 'faCar',
     tableRows: [
        {
         name: 'Ônibus/Metrô/Trem',
@@ -224,7 +220,6 @@ const tables = {
   
   personalTable: {
     tableName: 'Personal Expenses',
-    tableIcon: 'faMale',
     tableRows: [
        {
         name: 'Higiene Pessoal',
@@ -271,7 +266,6 @@ const tables = {
   
   dependantTable : {
     tableName: 'Dependant Expenses',
-    tableIcon: 'faChild',
     tableRows: [
        {
         name: 'Escola/faculdade',
@@ -318,7 +312,6 @@ const tables = {
   
   petTable : {
     tableName: 'Pet Expenses',
-    tableIcon: 'faPaw',
     tableRows: [
        {
         name: 'Petshop',
@@ -349,7 +342,6 @@ const tables = {
   
   leisureTable : {
     tableName: 'Leisure Expenses',
-    tableIcon: 'faUmbrellaBeach',
     tableRows: [
        {
         name: 'Restaurantes',

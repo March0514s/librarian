@@ -58,7 +58,6 @@ const primary = 'rgb(206, 197, 70)'
 function ModalTarget(props) {
   const { classes } = props;
   const [open, setOpen] = React.useState(false);
-  console.log(open);
 
   // const handleClickOpen = () => {
   //   console.log('handleClikOpen');

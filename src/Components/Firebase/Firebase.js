@@ -132,9 +132,16 @@ class Firebase {
       .set({
         ...tables
       })
-      .then(() => console.log("Tables generated successfully."))
+      .then((doc) => console.log("Tables generated successfully.", doc))
       .catch(err => console.log("Error generating tables: ", err));
   }
+
+  //GET TABLE
+  async getTable(month){
+  const document =  await this.db.collection(this.auth.currentUser.uid).doc(month).get()
+  return document.data();
+  }
+        
 }
 
 export default new Firebase();

@@ -19,18 +19,7 @@ import ModalTarget from "./ModalTarget";
 
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandHoldingUsd } from "@fortawesome/free-solid-svg-icons";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faBullseye } from "@fortawesome/free-solid-svg-icons";
-import { faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { faMedkit } from "@fortawesome/free-solid-svg-icons";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
-import { faMale } from "@fortawesome/free-solid-svg-icons";
-import { faChild } from "@fortawesome/free-solid-svg-icons";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faPlus, faBullseye } from "@fortawesome/free-solid-svg-icons";
 
 const style = theme => ({
   root: {
@@ -137,6 +126,9 @@ const PrimaryFab = withStyles(theme => ({
 function CardWindow(props) {
   const { classes } = props;
   const [open, setOpen] = React.useState(false); //Modal state
+
+  //Receives current document as a prop
+  //Renders it 
   
   const close = (
     <IconButton aria-label="close" size="small" onClick={props.close}>
@@ -174,7 +166,7 @@ function CardWindow(props) {
                 <TableRow>
                   <TableCell className={classes.firstHeaderCell}>
                     <div>
-                      <FontAwesomeIcon icon={props.table.tableIcon} size="2x" />
+                      <FontAwesomeIcon icon={props.icon} size="2x" />
                       <Typography variant="h5">
                         {props.table.tableName}
                       </Typography>
