@@ -111,17 +111,17 @@ class Firebase {
   //CHECK TABLES
   async checkTable(month) {
     this.db
-    .collection(this.auth.currentUser.uid)
-    .doc(month)
-    .get()
-    .then(snapshot => {
-      const data = snapshot.data();
+      .collection(this.auth.currentUser.uid)
+      .doc(month)
+      .get()
+      .then(snapshot => {
+        const data = snapshot.data();
 
-      if(!data){
-        this.generateTable(month);
-      }
-    })
-    .catch(err => console.log("Error generating tables: ", err));
+        if (!data) {
+          this.generateTable(month);
+        }
+      })
+      .catch(err => console.log("Error generating tables: ", err));
   }
 
   //CREATE TABLE
@@ -132,16 +132,27 @@ class Firebase {
       .set({
         ...tables
       })
-      .then((doc) => console.log("Tables generated successfully.", doc))
+      .then(doc => console.log("Tables generated successfully.", doc))
       .catch(err => console.log("Error generating tables: ", err));
   }
 
   //GET TABLE
-  async getTable(month){
-  const document =  await this.db.collection(this.auth.currentUser.uid).doc(month).get()
-  return document.data();
+  async getTable(month) {
+    const document = await this.db
+      .collection(this.auth.currentUser.uid)
+      .doc(month)
+      .get();
+    return document.data();
   }
-        
+
+  //GET ALL TABLES
+  async getAllTables() {
+    const docArray = [];
+    await this.db. collection(this.auth.currentUser.uid).get().then( snapshots => {
+      snapshots.forEach(snapshot => docArray.push({id: snapshot.id, data: snapshot.data()}));
+    })
+    return docArray;
+  }
 }
 
 export default new Firebase();

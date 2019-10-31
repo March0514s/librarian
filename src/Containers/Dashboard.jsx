@@ -22,8 +22,8 @@ import Avatar from "@material-ui/core/Avatar";
 //Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileInvoiceDollar, faCamera, faReceipt, faCoins, faHome, faMedkit,
-  faCar, faMale, faChild, faPaw, faAngleLeft, faAngleRight, faPowerOff,
-  faHandHoldingUsd, faUmbrellaBeach } from "@fortawesome/free-solid-svg-icons";
+faCar, faMale, faChild, faPaw, faAngleLeft, faAngleRight, faPowerOff, 
+faHandHoldingUsd, faUmbrellaBeach } from "@fortawesome/free-solid-svg-icons";
 
 const style = theme => ({
   root: {
@@ -99,9 +99,12 @@ const primary = "rgb(206, 197, 70)";
 function Dashboard(props) {
   const { classes } = props;
   const [userState, setUserState] = useState(null);
-  const [tableData, setTableData] = useState(null);
   const { state, dispatch } = React.useContext(Auth);
-
+  const [tableChanged, setTableChanged] = useState(false);
+  const [tables, setTables] = useState(null);
+  const [currentPos, setCurrentPos] = useState(0);
+  const [open, setOpen] = useState(null);
+  
   useEffect(() => {
     firebase.getUserState().then(user => {
       if (user) {
@@ -110,13 +113,10 @@ function Dashboard(props) {
     });
   }, []);
 
-  useEffect(() => {
-      (async () => {
-        let table = await firebase.getTable(currentDoc);
-        setTableData(table);
-      })();
-  }, );
-
+  useEffect(async () => {
+    await firebase.getAllTables().then(resolve => {setTables(resolve); {setCurrentPos(resolve.length - 1)}});
+  }, [])
+  
   const logout = () => {
     firebase.logout();
     setUserState(null);
@@ -126,8 +126,46 @@ function Dashboard(props) {
       payload: {}
     });
   };
+  
+  useEffect(() => {
+    const regexHelper = firebaseDate => {
+      const regex = /(\d{2})\s(\w{3})\s(\d{4})/g;
+      return moment().diff(
+        moment(`${regex.exec(firebaseDate)[0]}`, "DDMMMYYYY"),
+        "months"
+      );
+    };
 
-  const [open, setOpen] = useState(null);
+    const docList = previousMonths => {
+      const monthStrings = [];
+      const counterArray = [...Array(previousMonths + 1).keys()];
+
+      counterArray.map(x => {
+        monthStrings.unshift(
+          moment()
+            .subtract(x, "months")
+            .format("MMYYYY")
+        );
+      });
+
+      return monthStrings;
+    };
+
+    const genMissingDoc = docList => {
+      docList.map(async month => {
+        firebase.checkTable(month);
+      });
+
+      
+    };
+    
+    let creationTime;
+    firebase
+    .getUserCreationTime()
+    .then(resolve => (creationTime = resolve))
+    .then(() => genMissingDoc(docList(regexHelper(creationTime))));
+
+  }, []);
 
   const handleView = category => {
     setOpen(category);
@@ -137,44 +175,20 @@ function Dashboard(props) {
     setOpen(null);
   };
 
-  //TEMPORAL DATA
-  //TODO: Put in an effect hook.
-  //Compute distance between current month and user creation time;
-  //Check if there's corresponding tables in the table collection, and create them if not;
-  //Display only current month's tables and allow switching back and forth through the month selector;
-
-  const regexHelper = (firebaseDate) => {
-
-  const regex = /(\d{2})\s(\w{3})\s(\d{4})/g;
-  return moment().diff(moment(`${regex.exec(firebaseDate)[0]}`, 'DDMMMYYYY'), 'months')
+  const handleTableChangePrev = () => {
+    let number = currentPos - 1;
+    if (number >= 0){
+      setCurrentPos(number);
+    }
+  }
   
-}
-
-  const docList = (previousMonths) => {
-    const monthStrings = [];
-    const counterArray = [...Array(previousMonths + 1).keys()];
-    
-    counterArray.map(x => {
-      monthStrings.unshift(moment().subtract(x, 'months').format('MMYYYY'));
-    });
-   
-    return(monthStrings);
-
+  const handleTableChangeNext = () => {
+    let number = currentPos + 1;
+    if (number < tables.length){
+      setCurrentPos(number);
+    }
   }
 
-  const genMissingDoc = docList => {
-    docList.map( async month => {
-      firebase.checkTable(month);
-    })
-  }
-
-  let currentDoc = moment().format("MMYYYY");
-  let currentMonth = moment().format("MMM/YYYY");
-  let creationTime;
-  firebase
-    .getUserCreationTime()
-    .then(resolve => (creationTime = resolve))
-    .then(() => genMissingDoc(docList(regexHelper(creationTime))));
 
   return (
     <div className={classes.root}>
@@ -207,14 +221,14 @@ function Dashboard(props) {
         </div>
         <div className={classes.monthSelector}>
           <FontAwesomeIcon
-            onClick={() => console.log("previous")}
+            onClick={() => handleTableChangePrev()}
             icon={faAngleLeft}
             size="2x"
             color={primary}
           />
-          <Typography variant="h6">{currentMonth}</Typography>
+          <Typography variant="h6">{tables ? `${tables[currentPos].id.slice(0, 2)}·${tables[currentPos].id.slice(2, tables.lenght)}` : '...'}</Typography>
           <FontAwesomeIcon
-            onClick={() => console.log("next")}
+            onClick={() => handleTableChangeNext()}
             icon={faAngleRight}
             size="2x"
             color={primary}
@@ -330,40 +344,78 @@ function Dashboard(props) {
       </Drawer>
       <Container className={classes.container}>
         {open === "income" && (
-          <CardWindow table={tableData.incomeTable} icon={faHandHoldingUsd} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.incomeTable}
+            icon={faHandHoldingUsd}
+            close={handleClose}
+          />
         )}
         {open === "financial" && (
-          <CardWindow table={tableData.financialTable} icon={faCoins} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.financialTable}
+            icon={faCoins}
+            close={handleClose}
+          />
         )}
         {open === "housing" && (
-          <CardWindow table={tableData.housingTable} icon={faHome} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.housingTable}
+            icon={faHome}
+            close={handleClose}
+          />
         )}
         {open === "health" && (
-          <CardWindow table={tableData.healthTable} icon={faMedkit} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.healthTable}
+            icon={faMedkit}
+            close={handleClose}
+          />
         )}
         {open === "transport" && (
-          <CardWindow table={tableData.transportTable} icon={faCar} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.transportTable}
+            icon={faCar}
+            close={handleClose}
+          />
         )}
         {open === "personal" && (
-          <CardWindow table={tableData.personalTable} icon={faMale} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.personalTable}
+            icon={faMale}
+            close={handleClose}
+          />
         )}
         {open === "dependant" && (
-          <CardWindow table={tableData.dependantTable} icon={faChild} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.dependantTable}
+            icon={faChild}
+            close={handleClose}
+          />
         )}
-        {open === "pet" && <CardWindow table={tableData.petTable} icon={faPaw} close={handleClose} />}
+        {open === "pet" && (
+          <CardWindow
+            table={tables[currentPos].data.petTable}
+            icon={faPaw}
+            close={handleClose}
+          />
+        )}
         {open === "leisure" && (
-          <CardWindow table={tableData.leisureTable} icon={faUmbrellaBeach} close={handleClose} />
+          <CardWindow
+            table={tables[currentPos].data.leisureTable}
+            icon={faUmbrellaBeach}
+            close={handleClose}
+          />
         )}
         {open === "expenses" && (
           <div>
-            <CardWindow table={tableData.financialTable} icon={faCoins}/>
-            <CardWindow table={tableData.housingTable} icon={faHome}/>
-            <CardWindow table={tableData.healthTable} icon={faMedkit}/>
-            <CardWindow table={tableData.transportTable} icon={faCar}/>
-            <CardWindow table={tableData.personalTable} icon={faMale}/>
-            <CardWindow table={tableData.dependantTable} icon={faChild}/>
-            <CardWindow table={tableData.petTable} icon={faPaw}/>
-            <CardWindow table={tableData.leisureTable} icon={faUmbrellaBeach}/>
+            <CardWindow table={tables[currentPos].data.financialTable} icon={faCoins} />
+            <CardWindow table={tables[currentPos].data.housingTable} icon={faHome} />
+            <CardWindow table={tables[currentPos].data.healthTable} icon={faMedkit} />
+            <CardWindow table={tables[currentPos].data.transportTable} icon={faCar} />
+            <CardWindow table={tables[currentPos].data.personalTable} icon={faMale} />
+            <CardWindow table={tables[currentPos].data.dependantTable} icon={faChild} />
+            <CardWindow table={tables[currentPos].data.petTable} icon={faPaw} />
+            <CardWindow table={tables[currentPos].data.leisureTable} icon={faUmbrellaBeach} />
           </div>
         )}
         {open === null && <WelcomeMessage />}
