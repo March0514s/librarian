@@ -196,6 +196,8 @@ function CardWindow(props) {
                     <div>
                       <RoundedTextField
                         id="outlined-bare"
+                        type="number"
+                        InputProps={{ inputProps: { min: 0} }}
                         className={classes.textField}
                         // defaultValue={x.value.toFixed(2)}
                         placeholder={x.value.toFixed(2)}

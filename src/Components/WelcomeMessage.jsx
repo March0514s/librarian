@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/styles';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 
+//This is a simple test
+
 const style = theme => ({
     root: {
         display: 'flex',
